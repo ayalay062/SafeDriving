@@ -1,0 +1,23 @@
+.requests{
+    margin-top:8%;
+    margin-left: 25%;
+    width: 50%;
+    text-align-last: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size:20px;
+}
+.buttom{
+
+    margin-left: 0%;
+    color:orangered;
+    
+
+}
+p{
+    text-align-last: center; 
+    font-size:50px;
+    margin-top:2%
+}

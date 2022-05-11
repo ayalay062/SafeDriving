@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SafeDrivingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SafeDrivingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="offers" EntityType="SafeDrivingModel.offers" />
+    <EntitySet Name="persons" EntityType="SafeDrivingModel.persons" />
+    <EntitySet Name="requests" EntityType="SafeDrivingModel.requests" />
+    <EntitySet Name="travels" EntityType="SafeDrivingModel.travels" />
+  </EntityContainer>
+  <EntityType Name="offers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tz" Type="Int32" />
+    <Property Name="resourse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="destination" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="seats" Type="Int32" />
+    <Property Name="date_time" Type="DateTime" Precision="3" />
+    <Property Name="price" Type="Double" />
+    <Property Name="active" Type="Int32" />
+  </EntityType>
+  <EntityType Name="persons">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tz" Type="Int32" />
+    <Property Name="adress" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="mail" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="inqure" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ok" Type="Int32" />
+    <Property Name="password" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="requests">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tz" Type="Int32" />
+    <Property Name="resourse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="destination" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="seats" Type="Int32" />
+    <Property Name="date_time" Type="DateTime" Precision="3" />
+    <Property Name="active" Type="Int32" />
+    <Property Name="ignore_offers" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="travels">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_offer" Type="Int32" />
+    <Property Name="id_request" Type="Int32" />
+    <Property Name="resourse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="destination" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="seats" Type="Int32" />
+    <Property Name="date_time" Type="DateTime" Precision="3" />
+    <Property Name="price" Type="Double" />
+  </EntityType>
+</Schema>

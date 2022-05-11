@@ -1,0 +1,33 @@
+<p>ברוכים הבאים לאיזור האישי</p>
+<router-outlet></router-outlet> 
+<a routerLink="offersForm" >להוספת הצעת נסיעה </a> <br/>
+<a routerLink="RequestsForm" >להוספת בקשת נסיעה </a>   <br/>
+<input type="button" value="להצגת כל הנסיעות" (click)="travel()"> <br/>
+<div *ngIf="travelList">
+<div *ngFor="let travel of travelList">
+    resourse:{{travel.resourse}}
+    destination:{{travel.destination}}
+    date_time{{travel.date_time}}
+</div></div> <br/>
+
+<input type="button" value="להצגת בקשות נסיעה בתוקף" (click)="request()"> <br/>
+<div *ngIf="requestList">
+<div *ngFor="let request of requestList">
+resourse:{{request.resourse}}
+destination:{{request.destination}}
+date_time{{request.date_time}}
+<input type="button" value="לשינוי פרטי נסיעה" (click)="change_request(request.id)"> 
+<input type="button" value="delete" (click)="delete_request(request.id)">
+</div> </div><br/>
+
+<input type="button" value="להצגת הצעות נסיעה בתוקף" (click)="offer()"> <br/>
+<div *ngIf="offerList">
+<div *ngFor="let offer of offerList">
+resourse:{{offer.resourse}}
+destination:{{offer.destination}}
+date_time{{offer.date_time}}
+<input type="button" value="לשינוי פרטי נסיעה" (click)="change_offer(offer.id)"> 
+<input type="button" value="delete" (click)="delete_offer(offer.id)">
+ </div></div> <br/>
+
+ <button (click)="selectOffer();">בדיקת שליחת מייל</button>

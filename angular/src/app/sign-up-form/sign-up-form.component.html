@@ -1,0 +1,35 @@
+<p> PLEASE ENTER YOUR DETAILS:</p>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+    <div class="sign-up">
+        <input type="text" formControlName="username" required placeholder="enter username" /><br>
+  
+   
+        <input type="number" formControlName="tz" required placeholder="enter tz" /><br>
+   
+        <input type="text" formControlName="address" required placeholder="enter address" /><br>
+    
+    <input type="email" formControlName="mail" required placeholder="enter email" /><br>
+
+    <input type="tel" formControlName="phone" required placeholder="enter phone" /><br>
+
+    <input type="text" formControlName="inqure" required placeholder="enter inqure" /><br>
+
+    <input type="text" formControlName="password" required placeholder="choose a password " /><br>
+</div>
+    <p *ngIf="!myForm.valid&&myForm.dirty"> Missing details in form</p>
+    <div  class="buttom" >
+    <!-- <input type="submit" [disabled]="!myForm.valid" value="ok" color="warn" /> -->
+    <button mat-flat-button color="warn" type="submit"[disabled]="!myForm.valid" >O.K</button><br>
+    <button mat-flat-button color="warn" (click)="reset()"> RESET</button>
+</div>
+</form>
+
+
+<p>{{message}}</p>
+
+<div  class="buttom">
+<!-- <input type="button"  color:orangered  (click)="new()" value="משתמש רשום? לחץ כאן"> -->
+<button mat-flat-button color="warn" (click)="new()" >registered user ? please enter here!</button>
+
+</div>

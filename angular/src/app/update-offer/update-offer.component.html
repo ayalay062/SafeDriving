@@ -1,0 +1,21 @@
+<p>update-offer works!</p>
+
+
+<form  [formGroup]="myForm"  (ngSubmit)="onSubmit()" *ngIf="myForm">
+     <label> resource</label>
+     <input type="text" formControlName="resource" required>
+     <label> destination</label>
+     <input type="text" formControlName="destination" required>
+     <label> seats</label>
+     <input type="number" formControlName="seats" required>
+     <label> dateTime</label>
+     <input type="datetime" formControlName="dateTime" required>
+     <label> price</label>
+     <input type="number" formControlName="price" required>
+    
+     <br/><input type="submit" value="אישור עדכון פרטים" (click)="onSubmit()" [disabled]="!myForm.valid" >
+     <br/><input type="button" value="reset" (click)="reset()">
+ 
+ <p *ngIf="!myForm.valid&&myForm.dirty">חסר פרטים בטופס</p>
+ 
+ </form>

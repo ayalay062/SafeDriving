@@ -1,0 +1,40 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+
+    <!--<label>email:</label>
+    <input type="text" formControlName="email" required>-->
+    <div id="email">
+        <mat-label>email:</mat-label> <br />
+        <input matInput type="text" value="" formControlName="email" required>
+        <!-- <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+            <mat-label>email:</mat-label>
+            <input matInput #input maxlength="10" placeholder="Ex. Nougat">
+            <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+          </mat-form-field> -->
+    </div>
+
+    <div id="passport">
+        <mat-label>password:</mat-label> <br />
+        <input matInput type="text" value="" formControlName="password" required>
+    </div>
+    <!-- <label>password:</label>
+    <input type="text" formControlName="password" required>-->
+    <!--<br /><input type="button" value="reset" (click)="reset()">-->
+    <!--<input type="button" (click)="new()" value="משתמש חדש? לחץ כאן">-->
+
+
+
+    <br /><input type="submit" [disabled]="!myForm.valid" value="ok">
+    <br /><button mat-flat-button color="warn"  (click)="reset()">reset</button>
+ 
+
+    
+    <p *ngIf="!myForm.valid&&myForm.dirty">חסר פרטים בטופס</p>
+
+
+
+</form>
+
+<div>{{errorMassege}}</div>
+
+<br /><button mat-flat-button color="warn"  (click)="new()">new user ? please enter here!</button>

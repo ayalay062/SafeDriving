@@ -1,0 +1,39 @@
+<p>PLEASE ENTER YOUR OFFER DETAILS:</p>
+<form  [formGroup]="myForm"  (ngSubmit)="onSubmit()">
+
+   <!-- // <label>tz:</label>
+  //  <input type="number" formControlName="tz" required> -->
+  <div  class="offer-form">
+    <label> resource</label>
+    <input type="text" formControlName="resource" required><br>
+    <label> destination</label>
+    <input type="text" formControlName="destination" required><br>
+    <label> seats</label>
+    <input type="number" formControlName="seats" required><br>
+    <label> dateTime</label>
+    <input type="datetime" formControlName="dateTime" required><br>
+    <label> price</label>
+    <input type="number" formControlName="price" required><br>
+    <label> stations</label>
+    <input type="text" formControlName="stations" required><br>
+  </div>
+  <div class="buttom">
+    <button mat-flat-button color="warn" type="submit"(click)="onSubmit()" [disabled]="!myForm.valid" >SAVE</button><br>
+    <!-- <br/><input type="submit" value="save" (click)="onSubmit()" [disabled]="!myForm.valid" > -->
+    <button mat-flat-button color="warn" (click)="reset()"> RESET</button>
+    <!-- <br/><input type="button" value="reset" (click)="reset()"> -->
+  </div>
+<p *ngIf="!myForm.valid&&myForm.dirty">Missing details in form</p>
+
+</form>
+<div *ngIf=!requestList=null>
+  <button *ngFor="let request of requestList"  (click)="onClick(request.id)" ></button>
+  </div>
+<!-- <div *ngIf="" >
+  
+  <button mat-flat-button color="warn" (click)="request()"> >RESET</button>
+  <button  *ngFor="let request of requestlist"  (click)="request()"></button>
+
+</div> -->
+
+   
