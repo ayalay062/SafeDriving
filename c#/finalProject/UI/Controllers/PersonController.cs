@@ -10,7 +10,7 @@ using DTO;
 
 namespace UI.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/person")]
   //  [System.Web.Http.Cors()]
     public class PersonController : ApiController
     {
@@ -22,18 +22,18 @@ namespace UI.Controllers
 
         // GET api/signin/
     
-        public PersonInfo Get(string email, string password)
+        public IHttpActionResult Get(string email, string password)
         {
             PersonInfo personInfo = new PersonInfo();
             personInfo = BL.PersonLogic.Login(email, password);
 
             
-            return personInfo;
+            return Ok(personInfo);
         }
 
         // POST api/values
 
-        [Route("api/person/createNewPerson")]
+        [Route("createNewPerson")]
         public PersonInfo Post(PersonDto person)
         {
             PersonInfo result=BL.PersonLogic.signUp(person);

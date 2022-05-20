@@ -16,7 +16,7 @@ namespace BL.Convertions
         {
             offers offer = new offers();
             offer.id = t1.id;
-            offer.tz = t1.tz;
+            offer.id_person = t1.id_person;
             offer.resourse = t1.resourse;
             offer.destination = t1.destination;
             offer.seats = t1.seats;
@@ -31,7 +31,7 @@ namespace BL.Convertions
         {
             OffersDto offer = new OffersDto();
             offer.id = t1.id;
-            offer.tz = t1.tz;
+            offer.id_person = t1.id_person;
             offer.resourse = t1.resourse;
             offer.destination = t1.destination;
             offer.seats = t1.seats;

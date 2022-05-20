@@ -12,7 +12,7 @@ namespace UI
             // Web API configuration and services
 
             // Web API routes
-       config.EnableCors();
+            config.EnableCors();
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

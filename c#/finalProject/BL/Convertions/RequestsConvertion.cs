@@ -16,7 +16,7 @@ namespace BL.Convertions
         {
             requests request = new requests();
             request.id = t1.id;
-            request.tz = t1.tz;
+            request.id_person = t1.id_person;
             request.resourse = t1.resourse;
             request.destination = t1.destination;
             request.seats = t1.seats;
@@ -29,7 +29,7 @@ namespace BL.Convertions
         {
             RequestsDto request = new RequestsDto();
             request.id = t1.id;
-            request.tz = t1.tz;
+            request.id_person = t1.id_person;
             request.resourse = t1.resourse;
             request.destination = t1.destination;
             request.seats = t1.seats;

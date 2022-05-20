@@ -11,11 +11,13 @@ namespace DTO
     {
         public int id { get; set; }
         public string username { get; set; }
-        public Nullable<int> tz { get; set; }
+        public int tz { get; set; }
         public string adress { get; set; }
         public string mail { get; set; }
         public string phone { get; set; }
         public string inqure { get; set; }
-        public Nullable<int> ok { get; set; } 
+        public bool ok { get; set; }
+        public string password { get; set; }
+        public bool is_manager { get; set; }
     }
 }

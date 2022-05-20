@@ -8,7 +8,7 @@ namespace BL
 {
    public class TravelLogic
     {
-        public static List<TravelsDto> getByTz(int id)
+        public static List<TravelsDto> GetByPersonId(int id)
         {
             SafeDrivingEntities sd = new SafeDrivingEntities();
             
@@ -22,7 +22,7 @@ namespace BL
             return travels1;
         }
 
-        public static TravelsDto getById(int id)
+        public static TravelsDto GetById(int id)
         {
             SafeDrivingEntities sd = new SafeDrivingEntities();
             TravelsDto travel = Convertions.travelsConvertion.travelToDto(sd.travels.FirstOrDefault(x => x.id == id));

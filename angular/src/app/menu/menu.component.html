@@ -1,36 +1,15 @@
-<!--                    
-
-<div class="wrap-menu">
-    <div class="top">
-        <div class="margin-bottom" ><a routerLink="signInForm" class="menu-item">sign in </a></div>
-        <div class="margin-bottom padding-top"><a routerLink="signUpForm" color:black class="menu-item">sign up</a></div>
-        
-        <a routerLink="TravelersForm" >traveler form </a>  
-    <router-outlet></router-outlet>
-    </div>
-
-    <div class="bottom">
-        <a routerLink="forArea">איזור אישי</a>
-    </div>
-
-</div> -->
 <mat-toolbar color="primary">
     <mat-toolbar-row>
       
         <span class="menu-spacer"></span>
         <div>
-            <a mat-button routerLink="home" routerLinkActive="active_link"> ראשי </a>
+            <a mat-button routerLink="privateArea"  *ngIf="isLogin && name" > הי {{name}} </a>
+            <a mat-button routerLink="about" routerLinkActive="active_link"> ראשי </a>
 
-            <a mat-button routerLink="login" *ngIf="isLogin ==false" routerLinkActive="active_link"> התחברות </a>
-            <a mat-button routerLink="workers" *ngIf="isLogin" routerLinkActive="active_link"> משגיחים </a>
-            <a mat-button routerLink="workers-updates" *ngIf="isLogin" routerLinkActive="active_link"> דיווח שעות משגיחים </a>
-
-            <a mat-button routerLink="stores" *ngIf="isLogin" routerLinkActive="active_link"> חנויות </a>
-            <a mat-button routerLink="bad-stores" *ngIf="isLogin" routerLinkActive="active_link"> חנויות בעיתיות </a>
-            <a mat-button routerLink="workers-schedulers" *ngIf="isLogin" routerLinkActive="active_link"> ניהול מערכת שעות </a>
-
-            <a mat-button routerLink="updates" *ngIf="isLogin == true" routerLinkActive="active_link"> עדכון</a>
-            <a mat-button routerLink="WorkerScheduler" *ngIf="isLogin == true" routerLinkActive="active_link">מערכת שעות  </a>
+            <a mat-button routerLink="signInForm" *ngIf="isLogin ==false" routerLinkActive="active_link"> התחברות </a>
+            <a mat-button routerLink="signUpForm" *ngIf="isLogin ==false" routerLinkActive="active_link"> הרשמה </a>
+    
+         
             <a mat-button class="logout" (click)="logout();" *ngIf="isLogin">
                 <mat-icon>login</mat-icon>
             </a>

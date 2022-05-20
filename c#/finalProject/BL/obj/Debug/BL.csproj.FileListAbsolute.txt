@@ -271,3 +271,12 @@ C:\Users\User\Desktop\our project\c#\finalProject\BL\obj\Debug\BL.csproj.CoreCom
 C:\Users\User\Desktop\our project\c#\finalProject\BL\obj\Debug\BL.csproj.CopyComplete
 C:\Users\User\Desktop\our project\c#\finalProject\BL\obj\Debug\BL.dll
 C:\Users\User\Desktop\our project\c#\finalProject\BL\obj\Debug\BL.pdb
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\SendGrid.dll
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\StarkbankEcdsa.dll
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\SendGrid.pdb
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\SendGrid.xml
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\RestSharp.dll
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\RestSharp.xml
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\Mailjet.Client.dll
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\MailJetClient.dll
+C:\Users\User\Desktop\our project\c#\finalProject\BL\bin\Debug\MimeTypeMap.dll

@@ -12,7 +12,7 @@ using DTO;
 
 namespace UI.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+
     public class offersController : ApiController
     {
         //  GET api/values
@@ -21,38 +21,44 @@ namespace UI.Controllers
         //   return BL.Class1.
         //     }
 
-       // GET api/values/5
-        [Route("api/offers/getByTz")]
-        public List<OffersDto> Get(int tz)
-        {
-            return BL.OffersLogic.getByTz(tz);
-
-        }
         // GET api/values/5
-        [Route("api/offers/getById")]
+        //[Route("api/offers/GetById")]
+        //public List<OffersDto> Get(int id)
+        //{
+        //    return BL.OffersLogic.GetById(id);
+
+        //}
+        // GET api/values/5
+        [Route("api/offers/GetById")]
         public OffersDto GetId(int id)//מה לעשות?
         {
-            return BL.OffersLogic.getById(id);
+            return BL.OffersLogic.GetById(id);
+
+        }
+        [Route("api/offers/GetByPersonId")]
+        public IHttpActionResult GetByPersonId(int id)//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.GetByPersonId(id));
 
         }
         // GET api/values/5httpget
         [HttpGet]
         [Route("api/offers/selectOfferByRequestId/{reqId}/{offerId}")]
-        public bool selectOfferByRequestId(int reqId,int offerId)//מה לעשות?
+        public bool selectOfferByRequestId(int reqId, int offerId)//מה לעשות?
         {
-            return BL.OffersLogic.selectOfferByRequestId(offerId,reqId);
+            return BL.OffersLogic.selectOfferByRequestId(offerId, reqId);
 
         }
-        
+
         // POST api/values
         public List<RequestsDto> Post(OffersDto offer)
         {
-           return BL.OffersLogic.add(offer);
+            return BL.OffersLogic.add(offer);
         }//להיכן מוחזרת רשימת ההתאמות?
 
         public Boolean Post(int id)
         {
-           return BL.OffersLogic.deleteOffer(id);
+            return BL.OffersLogic.deleteOffer(id);
         }
 
         // PUT api/values/5

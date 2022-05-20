@@ -14,13 +14,23 @@ namespace DAL
     
     public partial class offers
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public offers()
+        {
+            this.travels = new HashSet<travels>();
+        }
+    
         public int id { get; set; }
-        public Nullable<int> tz { get; set; }
+        public int id_person { get; set; }
         public string resourse { get; set; }
         public string destination { get; set; }
-        public Nullable<int> seats { get; set; }
-        public Nullable<System.DateTime> date_time { get; set; }
-        public Nullable<double> price { get; set; }
-        public Nullable<int> active { get; set; }
+        public int seats { get; set; }
+        public System.DateTime date_time { get; set; }
+        public double price { get; set; }
+        public bool active { get; set; }
+    
+        public virtual persons persons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<travels> travels { get; set; }
     }
 }

@@ -11,21 +11,21 @@ using DTO;
 
 namespace UI.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    
   //  [System.Web.Http.Cors()]
     public class TravelController : ApiController
     {
         // GET api/travel/5
-        [Route("api/travel/getByTz")]
-        public List<TravelsDto> Get(int tz)
+        [Route("api/travel/GetByPersonId")]
+        public List<TravelsDto> GetByPersonId(int id)
         {
-            return BL.TravelLogic.getByTz(tz);
+            return BL.TravelLogic.GetByPersonId(id);
         }
 
-        [Route("api/travel/getById")]
+        [Route("api/travel/GetById")]
         public TravelsDto GetId(int id)//
         {
-            return BL.TravelLogic.getById(id);
+            return BL.TravelLogic.GetById(id);
 
         }
 

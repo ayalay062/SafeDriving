@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../Services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   isLogin = false;
-  constructor() { }
+  name = '';
+  constructor(private loginSer: LoginService, private router: Router) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('id')) {
+      this.name = localStorage.getItem('name');
+      this.isLogin = true;
+    }
+
+    this.loginSer.userLogin.subscribe(x => {
+      this.name = localStorage.getItem('name');
+      this.isLogin = true;
+    })
   }
-  logout(){}
+  logout() {
+    this.isLogin = false;
+    localStorage.removeItem('id');
+    localStorage.removeItem('name');
+    localStorage.removeItem('tz');
+    
+    this.router.navigateByUrl('about');
+
+  }
 }

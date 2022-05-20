@@ -5,10 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="12f9320f95a04ce2abad784ee2af0cc8" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="SafeDrivingModel.offers" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SafeDrivingModel.persons" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SafeDrivingModel.requests" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SafeDrivingModel.travels" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SafeDrivingModel.offers" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="SafeDrivingModel.persons" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="SafeDrivingModel.requests" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="SafeDrivingModel.travels" Width="1.5" PointX="5.25" PointY="3.5" />
+        <AssociationConnector Association="SafeDrivingModel.FK_personOffers" />
+        <AssociationConnector Association="SafeDrivingModel.FK_travelsOffers" />
+        <AssociationConnector Association="SafeDrivingModel.FK_personRequests" />
+        <AssociationConnector Association="SafeDrivingModel.FK_travelsRequests" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

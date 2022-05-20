@@ -10,7 +10,7 @@
           <ScalarProperty Name="seats" ColumnName="seats" />
           <ScalarProperty Name="destination" ColumnName="destination" />
           <ScalarProperty Name="resourse" ColumnName="resourse" />
-          <ScalarProperty Name="tz" ColumnName="tz" />
+          <ScalarProperty Name="id_person" ColumnName="id_person" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -18,6 +18,7 @@
     <EntitySetMapping Name="persons">
       <EntityTypeMapping TypeName="SafeDrivingModel.persons">
         <MappingFragment StoreEntitySet="persons">
+          <ScalarProperty Name="is_manager" ColumnName="is_manager" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="ok" ColumnName="ok" />
           <ScalarProperty Name="inqure" ColumnName="inqure" />
@@ -39,7 +40,7 @@
           <ScalarProperty Name="seats" ColumnName="seats" />
           <ScalarProperty Name="destination" ColumnName="destination" />
           <ScalarProperty Name="resourse" ColumnName="resourse" />
-          <ScalarProperty Name="tz" ColumnName="tz" />
+          <ScalarProperty Name="id_person" ColumnName="id_person" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -47,11 +48,6 @@
     <EntitySetMapping Name="travels">
       <EntityTypeMapping TypeName="SafeDrivingModel.travels">
         <MappingFragment StoreEntitySet="travels">
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="date_time" ColumnName="date_time" />
-          <ScalarProperty Name="seats" ColumnName="seats" />
-          <ScalarProperty Name="destination" ColumnName="destination" />
-          <ScalarProperty Name="resourse" ColumnName="resourse" />
           <ScalarProperty Name="id_request" ColumnName="id_request" />
           <ScalarProperty Name="id_offer" ColumnName="id_offer" />
           <ScalarProperty Name="id" ColumnName="id" />

@@ -18,11 +18,7 @@ namespace BL.Convertions
             travel.id = t1.id;
             travel.id_offer = t1.id_offer;
             travel.id_request = t1.id_request;
-            travel.resourse = t1.resourse;
-            travel.destination = t1.destination;
-            travel.seats = t1.seats;
-            travel.date_time = t1.date_time;
-            travel.price = t1.price;
+           
          
             return travel;
 
@@ -33,11 +29,7 @@ namespace BL.Convertions
             travel.id = t1.id;
             travel.id_offer = t1.id_offer;
             travel.id_request = t1.id_request;
-            travel.resourse = t1.resourse;
-            travel.destination = t1.destination;
-            travel.seats = t1.seats;
-            travel.date_time = t1.date_time;
-            travel.price = t1.price;
+         
             return travel;
         }
     }

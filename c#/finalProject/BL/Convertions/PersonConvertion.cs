@@ -14,14 +14,15 @@ namespace BL.Convertions
         public static persons DtoToPerson(PersonDto personDto)
         {
             persons person = new persons();
-            person.id = person.id;
-            person.adress = person.adress;
-            person.tz = person.tz;
-            person.inqure = person.mail;
-            person.inqure = person.inqure;
-            person.ok = person.ok;
-            person.phone = person.phone;
-            person.username = person.username;
+            person.id = personDto.id;
+            person.adress = personDto.adress;
+            person.tz = personDto.tz;
+            person.mail = personDto.mail;
+            person.inqure = personDto.inqure;
+            person.ok = personDto.ok;
+            person.phone = personDto.phone;
+            person.username = personDto.username;
+            person.password = personDto.password;
 
 
             return person;

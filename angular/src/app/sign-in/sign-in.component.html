@@ -1,40 +1,27 @@
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div class="form-wrapper-overlay"></div>
+  <form class="form-wrapper"  style="    margin: 20px auto;"  [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  
+    <h1>התחברות</h1>
 
-
-    <!--<label>email:</label>
-    <input type="text" formControlName="email" required>-->
     <div id="email">
-        <mat-label>email:</mat-label> <br />
+        <mat-label>מייל</mat-label> <br />
         <input matInput type="text" value="" formControlName="email" required>
-        <!-- <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-            <mat-label>email:</mat-label>
-            <input matInput #input maxlength="10" placeholder="Ex. Nougat">
-            <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-          </mat-form-field> -->
+        <mat-error *ngIf="myForm.get('email').errors?.required"> חובה להזין אימייל.</mat-error>
     </div>
 
     <div id="passport">
-        <mat-label>password:</mat-label> <br />
-        <input matInput type="text" value="" formControlName="password" required>
+        <mat-label>סיסמא</mat-label> <br />
+        <input matInput type="password" value="" formControlName="password" required>
+        <mat-error *ngIf="myForm.get('password').errors?.required"> חובה להזין סיסמא.</mat-error>
     </div>
-    <!-- <label>password:</label>
-    <input type="text" formControlName="password" required>-->
-    <!--<br /><input type="button" value="reset" (click)="reset()">-->
-    <!--<input type="button" (click)="new()" value="משתמש חדש? לחץ כאן">-->
+   
+    <br>
+    <div class="footer-wrapper">
+        <button mat-flat-button class="btn-color" type="submit" [disabled]="!myForm.valid">כניסה</button>
+    </div>
 
 
-
-    <br /><input type="submit" [disabled]="!myForm.valid" value="ok">
-    <br /><button mat-flat-button color="warn"  (click)="reset()">reset</button>
- 
-
-    
     <p *ngIf="!myForm.valid&&myForm.dirty">חסר פרטים בטופס</p>
-
-
-
+<br>
+    <a mat-button routerLink="/signUpForm" > משתמש חדש? לחץ כאן </a>
 </form>
-
-<div>{{errorMassege}}</div>
-
-<br /><button mat-flat-button color="warn"  (click)="new()">new user ? please enter here!</button>

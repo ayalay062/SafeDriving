@@ -7,6 +7,7 @@ import { OffersService } from '../Services/offers.service';
 import { RequestsService } from '../Services/requests.service';
 import { TravelsService } from '../Services/travels.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-private-area',
@@ -25,7 +26,8 @@ export class PrivateAreaComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('id') == null) {
-      alert("אינך מחובר, הנך מועבר לדף הכניסה")
+      Swal.fire('','"אינך מחובר, הנך מועבר לדף הכניסה"','error');
+    
       this.router.navigate(['signInForm']);
 
     }
@@ -38,19 +40,19 @@ export class PrivateAreaComponent implements OnInit {
 
   }
   travel(): void {
-    this.travels.getByTz(this.zmani).subscribe(
+    this.travels.getByPersonId(this.zmani).subscribe(
       res => { this.travelList = res },
       err => { console.log("faild!") }
     )
   }
   request(): void {
-    this.requests.getByTz(this.zmani).subscribe(
+    this.requests.getByPersonId(this.zmani).subscribe(
       res => { this.requestList = res; },
       err => { console.log("faild!") }
     )
   }
   offer(): void {
-    this.offers.getByTz(this.zmani).subscribe(
+    this.offers.getByPersonId(this.zmani).subscribe(
       res => { 
         if(res==null)
         

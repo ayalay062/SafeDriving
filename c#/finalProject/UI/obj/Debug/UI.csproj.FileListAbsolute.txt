@@ -572,3 +572,12 @@ C:\Users\User\Desktop\our project\c#\finalProject\UI\obj\Debug\UI.csproj.CoreCom
 C:\Users\User\Desktop\our project\c#\finalProject\UI\obj\Debug\UI.csproj.CopyComplete
 C:\Users\User\Desktop\our project\c#\finalProject\UI\obj\Debug\UI.dll
 C:\Users\User\Desktop\our project\c#\finalProject\UI\obj\Debug\UI.pdb
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\SendGrid.dll
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\StarkbankEcdsa.dll
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\SendGrid.pdb
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\SendGrid.xml
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\RestSharp.dll
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\RestSharp.xml
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\Mailjet.Client.dll
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\MailJetClient.dll
+C:\Users\User\Desktop\our project\c#\finalProject\UI\bin\MimeTypeMap.dll

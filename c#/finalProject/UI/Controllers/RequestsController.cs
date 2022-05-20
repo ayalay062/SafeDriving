@@ -9,7 +9,7 @@ using DTO;
 
 namespace UI.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/Requests")]
     public class RequestsController : ApiController
     {
         // GET api/values
@@ -19,44 +19,50 @@ namespace UI.Controllers
         //}
 
         //GET api/values/5
-        [Route("api/requests/getByTz")]
-        public List<RequestsDto> Get(int tz)
+        [Route("GetByPersonId")]
+        public List<RequestsDto> GetByPersonId(int id)
         {
-            return BL.RequestsLogic.getByTz(tz);
-
-            }
-            // GET api/values/5
-            [Route("api/requests/getById")]
-        public RequestsDto GetId(int id)//מה לעשות?
-        {
-            return BL.RequestsLogic.getById(id);
+            return BL.RequestsLogic.GetByPersonId(id);
 
         }
-        [Route("api/requests/SearchOffersByRequest")]
+        [Route("GetWithOffersByPersonId")]
+        public List<RequestsDto> GetWithOffersByPersonId(int id)
+        {
+            return BL.RequestsLogic.GetWithOffersByPersonId(id);
+        }
+
+
+        
+        // GET api/values/5
+        [Route("GetById")]
+        public RequestsDto GetId(int id)//מה לעשות?
+        {
+            return BL.RequestsLogic.GetById(id);
+
+        }
+        [Route("SearchOffersByRequest")]
         [HttpPost]
         public List<OffersDto> SearchOffersByRequest(RequestsDto req)//מה לעשות?
         {
             return BL.RequestsLogic.search(req);
-
         }
-
-        
 
 
         [HttpPost]
-        [Route("api/requests/AddRequest")]
-        public RequestsDto AddRequest(RequestsDto req)
+        [Route("AddRequest")]
+        public IHttpActionResult AddRequest(RequestsDto req)
         {
-            return BL.RequestsLogic.add(req);
+            return Ok(BL.RequestsLogic.add(req));
         }
+
         [HttpPost]
-        [Route("api/requests/connectDriver/{offerId}/{reqId}")]
-        public void ConnectDriver(int offerid,int requestid)
+        [Route("connectDriver/{offerId}/{reqId}")]
+        public void ConnectDriver(int offerid, int requestid)
         {
-             BL.RequestsLogic.selectOfferByRequestId(offerid, requestid);
+            BL.RequestsLogic.selectOfferByRequestId(offerid, requestid);
         }
         [HttpPost]
-        [Route("api/requests/deletefromlist /{offerId}/{reqId} ")]
+        [Route("deletefromlist /{offerId}/{reqId} ")]
         public void deletefromlist(int offerid, int requestid)
         {
             BL.RequestsLogic.UpdateRequestIgnoreOffers(offerid, requestid);

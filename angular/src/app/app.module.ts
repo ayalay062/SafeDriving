@@ -11,8 +11,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component'
 import { MenuComponent } from './menu/menu.component';
 import { SignInComponent } from './sign-in/sign-in.component'
-import { OffersFormComponent } from './offers-form/offers-form.component';
-import { RequestsComponent } from './requests/requests.component';
+import { OffersFormComponent } from './offersComponents/offers-form/offers-form.component';
+import { RequestsComponent } from './requestsComponents/requests/requests.component';
 import { PrivateAreaComponent } from './private-area/private-area.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,12 +30,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { UpdateOfferComponent } from './update-offer/update-offer.component';
-import { UpdateRequestComponent } from './update-request/update-request.component';
-import { IgnoreRequestComponent } from './ignore-request/ignore-request.component';
-import { AcceptRequestComponent } from './accept-request/accept-request.component';
+import { UpdateOfferComponent } from './offersComponents/update-offer/update-offer.component';
+import { UpdateRequestComponent } from './requestsComponents/update-request/update-request.component';
+import { IgnoreRequestComponent } from './requestsComponents/ignore-request/ignore-request.component';
+import { AcceptRequestComponent } from './requestsComponents/accept-request/accept-request.component';
 import { AboutComponent } from './about/about.component';
-
+import { ViewActiveRequestsComponent } from './requestsComponents/view-active-requests/view-active-requests.component';
+import { ViewHistoryRequestsComponent } from './requestsComponents/view-history-requests/view-history-requests.component';
+import { ViewHistoryOffersComponent } from './offersComponents/view-history-offers/view-history-offers.component';
+import { ViewActiveOffersComponent } from './offersComponents/view-active-offers/view-active-offers.component';
+import { ViewOwnOffersComponent } from './offersComponents/view-own-offers/view-own-offers.component';
+import { ViewOwnRequestsComponent } from './requestsComponents/view-own-requests/view-own-requests.component';
+import { CommonModule } from '@angular/common';
 
 
 const routes: Routes = [
@@ -44,16 +50,26 @@ const routes: Routes = [
     component: AboutComponent,
     pathMatch: 'full'
   },
+  { path: 'about', component: AboutComponent },
   { path: 'signInForm', component: SignInComponent },
   { path: 'signUpForm', component: SignUpFormComponent },
 
   {
     path: 'privateArea', component: PrivateAreaComponent,
-    children: [{
+    children: [
+      {
       path: 'offersForm', component: OffersFormComponent//,pathMatch: "full"
     },
-    { path: 'RequestsForm', component: RequestsComponent }
-      , { path: 'updateRequest', component: UpdateRequestComponent }
+    { path: 'RequestsForm', component: RequestsComponent },
+    { path: 'RequestsHistory', component: ViewHistoryRequestsComponent },
+    { path: 'ActiveRequests', component: ViewActiveRequestsComponent },
+    { path: 'OwnRequests', component: ViewOwnRequestsComponent },
+   
+    { path: 'OffersHistory', component: ViewHistoryOffersComponent },
+    { path: 'ActiveOffers', component: ViewHistoryOffersComponent },
+    { path: 'OwnOffers', component: ViewOwnOffersComponent }
+  
+      , { path: 'updateRequest/:id', component: UpdateRequestComponent }
 
     ]
   }, { path: 'updateOffer/:id', component: UpdateOfferComponent }
@@ -66,35 +82,23 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     MenuComponent,
-    // BorrowFormComponent,
     SignUpFormComponent,
     SignInComponent,
     OffersFormComponent,
     RequestsComponent,
-
     PrivateAreaComponent,
-
-
-
-
-
     UpdateOfferComponent,
-
     UpdateRequestComponent,
-
     IgnoreRequestComponent,
-
     AcceptRequestComponent,
-
     AboutComponent,
-
-    // SuggestionsOffersComponent
-    //  ApdateofferComponent
-    // offersComponent
+    ViewActiveRequestsComponent,
+    ViewHistoryRequestsComponent,
+    ViewHistoryOffersComponent,
+    ViewActiveOffersComponent,
   ],
   imports: [
-
-    BrowserModule,
+    CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

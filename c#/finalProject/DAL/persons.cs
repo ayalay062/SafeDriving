@@ -14,14 +14,27 @@ namespace DAL
     
     public partial class persons
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public persons()
+        {
+            this.offers = new HashSet<offers>();
+            this.requests = new HashSet<requests>();
+        }
+    
         public int id { get; set; }
         public string username { get; set; }
-        public Nullable<int> tz { get; set; }
+        public int tz { get; set; }
         public string adress { get; set; }
         public string mail { get; set; }
         public string phone { get; set; }
         public string inqure { get; set; }
-        public Nullable<int> ok { get; set; }
+        public bool ok { get; set; }
         public string password { get; set; }
+        public bool is_manager { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<offers> offers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<requests> requests { get; set; }
     }
 }

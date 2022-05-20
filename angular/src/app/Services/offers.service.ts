@@ -25,9 +25,9 @@ export class OffersService {
     return this.http.get<Offer>(this.url + "getById/" + "?id=" + id);
 
   }
-  getByTz(tz: number): Observable<Offer[]> {//יש הבדל אם חוזר list או arr?
+  getByPersonId(id: number): Observable<Offer[]> {//יש הבדל אם חוזר list או arr?
     //debugger;
-    return this.http.get<Offer[]>(this.url + "getByTz/" + "?tz=" + tz);
+    return this.http.get<Offer[]>(this.url + "getByPersonId/" + "?id=" + id);
   }
   delete(id: number): Observable<boolean> {
     return this.http.post<boolean>(this.url, "?id=" + id);

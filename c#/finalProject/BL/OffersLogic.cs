@@ -30,7 +30,7 @@ namespace BL
             SafeDrivingEntities sd = new SafeDrivingEntities();
             //בדיקה לפי מוצא ,יעד ותאריך
             List<requests> it = sd.requests.Where(x => x.resourse == offer.resourse && x.destination == offer.destination
-            && x.date_time.Value.Date == offer.date_time.Value.Date).ToList();
+            && x.date_time.Date == offer.date_time.Date).ToList();
             //המרה לdto
             List<RequestsDto> requests = new List<RequestsDto>();
             for (int i = 0; i < it.Count; i++)
@@ -40,10 +40,10 @@ namespace BL
             return requests;
         }
         // החזרת רשימת נסיעות לפי תעודת זהות
-        public static List<OffersDto> getByTz(int tz)
+        public static List<OffersDto> GetByPersonId(int id)
         {//לבדוק אם הנסיעות פעילות
             SafeDrivingEntities sd = new SafeDrivingEntities();
-            List<offers> offer = sd.offers.Where(x => x.tz == tz).ToList();
+            List<offers> offer = sd.offers.Where(x => x.id_person == id).ToList();
             List<OffersDto> offers = new List<OffersDto>();
             for (int i = 0; i < offer.Count; i++)
             {
@@ -54,7 +54,7 @@ namespace BL
             return offers;
         }
         //החזרת נסיעה לפי מספר נסיעה
-        public static OffersDto getById(int id)
+        public static OffersDto GetById(int id)
         {
             SafeDrivingEntities sd = new SafeDrivingEntities();
 
@@ -66,7 +66,8 @@ namespace BL
         public static Boolean deleteOffer(int id)
         {
             SafeDrivingEntities sd = new SafeDrivingEntities();
-            sd.offers.FirstOrDefault(r => r.id == id).active = 0;//כך מוחקים?
+            sd.offers.FirstOrDefault(r => r.id == id).active = false;//כך מוחקים?
+            sd.SaveChanges();
             return true;//לבדוק שזה נמחק
         }
 
@@ -118,10 +119,10 @@ namespace BL
             {
 
                 var offer = sd.offers.FirstOrDefault(x => x.id == offerId);
-                var personDtriver = sd.persons.FirstOrDefault(x => x.tz == offer.tz);
+                var personDtriver = sd.persons.FirstOrDefault(x => x.id == offer.id_person);
 
                 var req = sd.requests.FirstOrDefault(x => x.id == reqId);
-                var personReq = sd.persons.FirstOrDefault(x => x.tz == req.tz);
+                var personReq = sd.persons.FirstOrDefault(x => x.id == req.id_person);
 
                 var subject = "בקשת הצטרפות לנסיעה";
                 var body = "<h1 style='color: #5e9ca0; text-align: right;'>&nbsp; !שלום נהג " + personDtriver.username + "</h1>" +
@@ -130,7 +131,7 @@ namespace BL
 "<p style='display: inline-block; text-align: left;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/ignore-request?reqid=" + reqId + "&offerid="
 + offerId + "'>סרב</a></strong></p>";
 
-                GeneralLogic.sendEmail(personDtriver.mail, subject,body);
+                GeneralLogic.sendEmailAsync(personDtriver.mail, subject,body);
                 return true;
             }
 
