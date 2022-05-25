@@ -13,7 +13,7 @@ namespace BL
     public class OffersLogic
     {
         //הכנסת נסיעה
-        public static List<RequestsDto> add(OffersDto offer)
+        public static int add(OffersDto offer)
         {
             offers p1 = new offers();
             p1 = Convertions.offersConvertion.DtoToOffer(offer);
@@ -21,8 +21,8 @@ namespace BL
             sd.offers.Add(p1);
 
             sd.SaveChanges();
-            List<RequestsDto> list_requests = search(offer);
-            return list_requests;
+            //List<RequestsDto> list_requests = search(offer);
+            return p1.id;
         }
         public static List<RequestsDto> search(OffersDto offer)
         {
@@ -63,9 +63,10 @@ namespace BL
 
             return offer;
         }
-        public static Boolean deleteOffer(int id)
+        public static bool deleteOffer(int id)
         {
             SafeDrivingEntities sd = new SafeDrivingEntities();
+            
             sd.offers.FirstOrDefault(r => r.id == id).active = false;//כך מוחקים?
             sd.SaveChanges();
             return true;//לבדוק שזה נמחק

@@ -12,10 +12,12 @@ export class OffersService {
   url = "http://localhost:50940/api/offers/"
 
   constructor(private http: HttpClient) { }
-  addAndGet(offer: Offer): Observable<request[]> {
+  addAndGet(offer: Offer): Observable<number> {
     //debugger;
-    return this.http.post<request[]>(this.url, "?offers=" + offer);
+    return this.http.post<number>(this.url + "AddOffer", offer);
   }
+
+
 
   getAll(): Offer[] {
     return //?
@@ -37,8 +39,8 @@ export class OffersService {
       + 'selectOfferByRequestId/' + offerId + '/' + reqId);
   }
 
-  
-  
+
+
 
 
 }

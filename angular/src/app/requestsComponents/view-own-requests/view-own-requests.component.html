@@ -24,6 +24,7 @@
 
                 <td>
                     <mat-icon class="icon" (click)="editReq(req.id);">edit</mat-icon>
+                    <mat-icon class="icon" (click)="deleteReq(req.id);">close</mat-icon>
                 </td>
             </tr>
         </tbody>
@@ -41,6 +42,7 @@
                 <th>מספר מקומות</th>
                 <th>נהג</th>
                 <th> מקור ויעד נסיעה</th>
+                <th> מחיר</th>
                 <th>תאריך ושעה נסיעה</th>
                 <th>פעולות</th>
         </thead>
@@ -54,6 +56,7 @@
                 <td> {{req.seats}}</td>
                 <td> {{req.driver != null? (req.driver.username + ', ' + req.driver.phone) : ''}} </td>
                 <td> {{req.offer != null? (req.offer.resourse + ' - ' + req.offer.destination) : ''}} </td>
+                <td> {{req.offer != null? (req.offer.price) : ''}} </td>
                 <td> {{req.offer != null? (req.offer.date_time | date:"dd/MM/yyyy HH:mm") : ''}} </td>
                 <td>
                     <mat-icon class="icon" title="הסר נסיעה מהנהג" (click)="removeReqTravel(req.id);">remove</mat-icon>

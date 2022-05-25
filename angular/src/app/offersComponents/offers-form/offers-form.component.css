@@ -1,32 +1,13 @@
-/* .sign-up{
 
-    
-    text-align-last: center;
-    
-    
-
-}   */
-
-.offer-form{
-    margin-top:5%;
-    margin-left: 25%;
-    width: 50%;
-    text-align-last: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    font-size:20px;
+.div-reg-wrapper p{
+    position: relative;
+    margin-top: -25px;
+    margin-bottom: 20px;
 }
-.buttom{
 
-    margin-left: 0%;
-    color:orangered;
-    
-
+.div-reg-wrapper mat-label {
+    display: block;
 }
-p{
-    text-align-last: center; 
-    font-size:50px;
-    margin-top:2%
+.div-reg-wrapper{
+    min-height: 75px;
 }

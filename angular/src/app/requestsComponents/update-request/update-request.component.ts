@@ -30,30 +30,29 @@ export class UpdateRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe(params => {
-      
-      var id = +params['id'];
+    this.route.queryParams.subscribe(params => {
+
+      var id = this.route.snapshot.params['id'];
       this.requests.getById(id).subscribe(x => {
         this.myForm = this.fb.group(x);
-        this.myForm.patchValue({ date_time: new Date(x.date_time).toISOString().substring(0, 16) })
+        this.myForm.patchValue({ date_time:new Date( new Date(x.date_time).setTime(new Date(x.date_time).getTime()  + (3*60*60*1000))).toISOString().substring(0, 16) })
       });
     });
   }
   onSubmit(): void {
 
     var r = <request>this.myForm.value;
-    var id = +localStorage.getItem('id');
+  //  var id = +localStorage.getItem('id');
 
-    r.id_person = id;
-    this.requests.addAndGet(r).subscribe(res => {
+  //  r.id_person = id;
+    this.requests.updateRequest(r).subscribe(res => {
       if (res == null) {
 
         Swal.fire('', "ארעה שגיאה במערכת", 'error');
       }
       else {
-        Swal.fire('', "בקשת הנסיעה נוספה בהצלחה", 'success');
-        this.router.navigateByUrl('ActiveOffers');
-
+        Swal.fire('', "בקשת הנסיעה עודכנה בהצלחה", 'success');
+        this.router.navigateByUrl('privateArea/ActiveOffers');
       }
       // this.offerList = res;
       //debugger;

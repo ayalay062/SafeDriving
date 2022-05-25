@@ -58,26 +58,94 @@ namespace BL
             }
         }
 
+
+        // החזרת רשימת נסיעות לפי תעודת זהות
+        public static List<RequestsDto> GetHistoryByPersonId(int id)
+        {//לבדוק אם הנסיעות פעילות
+            var now = DateTime.Now;
+            SafeDrivingEntities sd = new SafeDrivingEntities();
+            List<requests> request = sd.requests.Where(x => x.id_person == id
+            && x.active == true && x.date_time < now).ToList();
+            List<RequestsDto> requests = new List<RequestsDto>();
+            for (int i = 0; i < request.Count; i++)
+            {
+                requests.Add(Convertions.RequestsConvertion.RequestToDto(request[i]));
+            }
+
+            return requests;
+        }
+        // החזרת רשימת נסיעות סגורות לפי תעודת זהות
+        public static List<RequestsDto> GetHistoryWithOffersByPersonId(int id)
+        {//לבדוק אם הנסיעות פעילות
+            var now = DateTime.Now;
+            using (var sd = new SafeDrivingEntities())
+            {
+                List<requests> request = sd.requests.Where(x => x.id_person == id
+                && x.active == false && x.date_time < now).ToList();
+
+                var travel = sd.travels.FirstOrDefault(x => x.id_request == id);
+                offers offer = null;
+                persons person = null;
+                if (travel != null)
+                {
+                    offer = sd.offers.FirstOrDefault(x => x.id == travel.id_offer);
+                    person = sd.persons.FirstOrDefault(x => x.id == offer.id_person);
+                }
+
+                List<RequestsDto> requests = new List<RequestsDto>();
+                for (int i = 0; i < request.Count; i++)
+                {
+                    var req = Convertions.RequestsConvertion.RequestToDto(request[i]);
+                    req.driver = person == null ? null : Convertions.PersonConvertion.PersonToDto(person);
+                    req.travel = travel == null ? null : Convertions.travelsConvertion.travelToDto(travel);
+                    req.offer = offer == null ? null : Convertions.offersConvertion.OfferToDto(offer);
+                    requests.Add(req);
+                }
+
+                return requests;
+            }
+        }
+
         //החזרת נסיעה לפי מספר נסיעה
         public static RequestsDto GetById(int id)
         {
-            SafeDrivingEntities sd = new SafeDrivingEntities();
+            using (var sd = new SafeDrivingEntities())
+            {
+                RequestsDto request = Convertions.RequestsConvertion.RequestToDto(sd.requests.FirstOrDefault(x => x.id == id));
 
-            RequestsDto request = Convertions.RequestsConvertion.RequestToDto(sd.requests.FirstOrDefault(x => x.id == id));
 
-
-            return request;
+                return request;
+            }
         }
         //מחיקת נסיעה
-        public static void deleteRequest(int id)
+        public static bool deleteRequest(int id)
         {
-            SafeDrivingEntities sd = new SafeDrivingEntities();
-            sd.requests.FirstOrDefault(r => r.id == id).active = false;//כך מוחקים?
+            using (var sd = new SafeDrivingEntities())
+            {
+                var item = sd.requests.FirstOrDefault(r => r.id == id);
+                //אם מחובר לנסיעה יש למחוק + לשלוח מייל
+
+
+                sd.requests.Remove(item);
+                sd.SaveChanges();
+            }
+            return true;
         }
         //עדכון נסיעה
-        public static void updateRequest(int id)
+        public static RequestsDto updateRequest(RequestsDto p1)
         {
-            //אולי מחיקה והכנסה?
+
+            using (SafeDrivingEntities sd = new SafeDrivingEntities())
+            {
+                var fromDB = sd.requests.FirstOrDefault(x => x.id == p1.id);
+                fromDB.seats = p1.seats;
+                fromDB.destination = p1.destination;
+                fromDB.resourse = p1.resourse;
+                fromDB.date_time = p1.date_time;
+                sd.SaveChanges();
+
+                return Convertions.RequestsConvertion.RequestToDto(fromDB);
+            }
         }
 
         //הכנסת נסיעה
@@ -85,6 +153,7 @@ namespace BL
         {
             requests p1 = new requests();
             p1 = Convertions.RequestsConvertion.DtoToRequest(req);
+            p1.active = true;
             using (SafeDrivingEntities sd = new SafeDrivingEntities())
             {
                 sd.requests.Add(p1);

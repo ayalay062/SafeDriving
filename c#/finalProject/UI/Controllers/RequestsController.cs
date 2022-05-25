@@ -31,8 +31,18 @@ namespace UI.Controllers
             return BL.RequestsLogic.GetWithOffersByPersonId(id);
         }
 
+        [Route("GetHistoryByPersonId")]
+        public List<RequestsDto> GetHistoryByPersonId(int id)
+        {
+            return BL.RequestsLogic.GetHistoryByPersonId(id);
 
-        
+        }
+        [Route("GetHistoryWithOffersByPersonId")]
+        public List<RequestsDto> GetHistoryWithOffersByPersonId(int id)
+        {
+            return BL.RequestsLogic.GetHistoryWithOffersByPersonId(id);
+        }
+
         // GET api/values/5
         [Route("GetById")]
         public RequestsDto GetId(int id)//מה לעשות?
@@ -54,6 +64,20 @@ namespace UI.Controllers
         {
             return Ok(BL.RequestsLogic.add(req));
         }
+        [HttpPost]
+        [Route("UpdateRequest")]
+        public IHttpActionResult UpdateRequest(RequestsDto req)
+        {
+            return Ok(BL.RequestsLogic.updateRequest(req));
+        }
+
+        [HttpDelete]
+        [Route("DeleteRequest")]
+        public IHttpActionResult DeleteRequest(int id)
+        {
+            return Ok(BL.RequestsLogic.deleteRequest(id));
+        }
+
 
         [HttpPost]
         [Route("connectDriver/{offerId}/{reqId}")]

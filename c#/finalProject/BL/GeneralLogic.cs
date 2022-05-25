@@ -111,6 +111,29 @@ namespace BL
             return null;
         }
 
+
+        public static async Task SendEmailMessage(string to, string messageHTML, string subject)
+        {
+            MailjetClient client = new MailjetClient("886a208b3085c050898c00eb5ddaac7f", "8e4ef3cab37f806a38921386dccbfa3d")
+            {
+
+            };
+                    
+            // construct your email with builder
+            var email = new TransactionalEmailBuilder()
+                   .WithFrom(new SendContact("safe.driving.2022@gmail.com"))
+                   .WithSubject(subject)
+                   .WithHtmlPart(messageHTML)
+                   .WithTo(new SendContact(to))
+                   .Build();
+
+            // invoke API to send email
+            var response = await client.SendTransactionalEmailAsync(email);
+   
+        }
+
+
+
         public static async Task sendEmailAsync(string to, string subject, string body)
         {
             var client = new HttpClient();

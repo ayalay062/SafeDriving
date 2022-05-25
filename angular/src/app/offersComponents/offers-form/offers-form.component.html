@@ -1,39 +1,65 @@
-<p>PLEASE ENTER YOUR OFFER DETAILS:</p>
-<form  [formGroup]="myForm"  (ngSubmit)="onSubmit()">
+<div class="form-wrapper">
+  <h1>הצעת נסיעה חדשה</h1>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
-   <!-- // <label>tz:</label>
+    <!-- // <label>tz:</label>
   //  <input type="number" formControlName="tz" required> -->
-  <div  class="offer-form">
-    <label> resource</label>
-    <input type="text" formControlName="resource" required><br>
-    <label> destination</label>
-    <input type="text" formControlName="destination" required><br>
-    <label> seats</label>
-    <input type="number" formControlName="seats" required><br>
-    <label> dateTime</label>
-    <input type="datetime" formControlName="dateTime" required><br>
-    <label> price</label>
-    <input type="number" formControlName="price" required><br>
-    <label> stations</label>
-    <input type="text" formControlName="stations" required><br>
-  </div>
-  <div class="buttom">
-    <button mat-flat-button color="warn" type="submit"(click)="onSubmit()" [disabled]="!myForm.valid" >SAVE</button><br>
-    <!-- <br/><input type="submit" value="save" (click)="onSubmit()" [disabled]="!myForm.valid" > -->
-    <button mat-flat-button color="warn" (click)="reset()"> RESET</button>
-    <!-- <br/><input type="button" value="reset" (click)="reset()"> -->
-  </div>
-<p *ngIf="!myForm.valid&&myForm.dirty">Missing details in form</p>
+    <div class="offer-form">
 
-</form>
-<div *ngIf=!requestList=null>
-  <button *ngFor="let request of requestList"  (click)="onClick(request.id)" ></button>
+      <div class="div-reg-wrapper">
+
+        <mat-label>מקור</mat-label>
+        <input class="mat-input-form" type="text" formControlName="resourse" required />
+        <p *ngIf="myForm.get('resourse').errors?.required" class="mat-error"> חובה למלא מקור : עיר וכתובת מדויקת</p>
+
+      </div>
+
+      <div class="div-reg-wrapper">
+
+        <mat-label> יעד</mat-label>
+        <input type="text" class="mat-input-element" formControlName="destination" required>
+        <p *ngIf="myForm.get('destination').errors?.required" class="mat-error"> חובה למלא יעד : עיר וכתובת מדויקת</p>
+
+      </div>
+      <div class="div-reg-wrapper">
+
+        <mat-label> מספר נוסעים</mat-label>
+        <input type="number" class="mat-input-element" formControlName="seats" required>
+        <p *ngIf="myForm.get('seats').errors?.required" class="mat-error"> חובה למלא מספר נוסעים</p>
+
+      </div>
+      <div class="div-reg-wrapper">
+        <mat-label> תאריך ושעה</mat-label>
+        <input type="datetime-local" class="mat-input-element" formControlName="date_time" required>
+        <p *ngIf="myForm.get('date_time').errors?.required" class="mat-error"> חובה למלא תאריך ושעה </p>
+
+      </div>
+      <div class="div-reg-wrapper">
+
+        <mat-label> מחיר</mat-label>
+        <input type="number" class="mat-input-element" formControlName="price" required>
+        <p *ngIf="myForm.get('price').errors?.required" class="mat-error"> חובה למלא מחיר </p>
+
+      </div>
+
+
+    </div>
+    <div class="buttom footer-wrapper">
+
+      <button mat-flat-button color="warn" type="submit" 
+        [disabled]="!myForm.valid">שמירה</button><br>
+
+    </div>
+
+
+  </form>
+  <div *ngIf=!requestList=null>
+    <button *ngFor="let request of requestList" (click)="onClick(request.id)"></button>
   </div>
+</div>
 <!-- <div *ngIf="" >
   
   <button mat-flat-button color="warn" (click)="request()"> >RESET</button>
   <button  *ngFor="let request of requestlist"  (click)="request()"></button>
 
 </div> -->
-
-   

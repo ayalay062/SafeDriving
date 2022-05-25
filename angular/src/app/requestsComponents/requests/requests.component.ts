@@ -34,6 +34,7 @@ export class RequestsComponent implements OnInit {
   onSubmit(): void {
 
     var r = <request>this.myForm.value;
+    r.active = true;
     var id = +localStorage.getItem('id');
 
     r.id_person = id;
@@ -44,7 +45,7 @@ export class RequestsComponent implements OnInit {
       }
       else{
         Swal.fire('', "בקשת הנסיעה נוספה בהצלחה", 'success');
-        this.router.navigateByUrl('ActiveOffers');
+        this.router.navigateByUrl('privateArea/ActiveOffers');
 
       }
      // this.offerList = res;

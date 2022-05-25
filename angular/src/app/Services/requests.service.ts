@@ -16,6 +16,10 @@ export class RequestsService {
     //debugger;
     return this.http.post<request>(this.url + 'AddRequest', request);
   }
+  updateRequest(request: request): Observable<request> {
+    //debugger;
+    return this.http.post<request>(this.url + 'UpdateRequest', request);
+  }
   ConnectDriver(idOffer: number, idRequest: number) {
     // ??איך לקרוא לפונקציה
     return this.http.post(this.url, "/connectDriver ?idOffer=" + idOffer + "?idRequest=" + idRequest);
@@ -34,7 +38,13 @@ export class RequestsService {
     return this.http.get<request[]>(this.url + "getWithOffersByPersonId/" + "?id=" + id);
 
   }
-  
+  getHistoryWithOffersByPersonId(id: number): Observable<request[]> {//יש הבדל אם חוזר list או arr?
+
+    return this.http.get<request[]>(this.url + "GetHistoryWithOffersByPersonId/" + "?id=" + id);
+
+  }
+
+
 
 
   getById(id: number) {
@@ -43,12 +53,11 @@ export class RequestsService {
 
   }
   delete(id: number): Observable<boolean> {
-    return this.http.post<boolean>(this.url, "?id=" + id);
+    return this.http.delete<boolean>(this.url + "DeleteRequest?id=" + id);
   }
 
 
   deletefromlist(idOffer: number, idRequest: number) {
-
 
     return this.http.post(this.url, "  deletefromlist ?idOffer=" + idOffer + "?idRequest=" + idRequest);
 

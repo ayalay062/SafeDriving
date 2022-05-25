@@ -12,7 +12,7 @@ using DTO;
 
 namespace UI.Controllers
 {
-
+    [RoutePrefix("api/offers")]
     public class offersController : ApiController
     {
         //  GET api/values
@@ -50,8 +50,9 @@ namespace UI.Controllers
 
         }
 
-        // POST api/values
-        public List<RequestsDto> Post(OffersDto offer)
+        [HttpPost]
+        [Route("AddOffer")]
+        public int AddOffer(OffersDto offer)
         {
             return BL.OffersLogic.add(offer);
         }//להיכן מוחזרת רשימת ההתאמות?
@@ -67,8 +68,14 @@ namespace UI.Controllers
         //}
 
         //// DELETE api/values/5
-        //public void Delete(int id)
-        //{
-        //}
+        /// <summary>
+        [HttpDelete]
+        [Route("DeleteOffer")]
+        /// </summary>
+        /// <param name="id"></param>
+        public bool Delete(int id)
+        {
+            return BL.OffersLogic.deleteOffer(id);
+        }
     }
 }

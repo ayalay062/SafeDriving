@@ -9,7 +9,7 @@ export class request {
     destination: string;
     seats: number;
     date_time: Date;
-    active: number;
+    active: boolean;
     ignore_offers: string;
 
     offer: Offer;

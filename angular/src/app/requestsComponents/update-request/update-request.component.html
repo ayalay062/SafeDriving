@@ -1,13 +1,13 @@
 <div class="form-wrapper">
     <h1>עדכון בקשת נסיעה </h1>
 
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="myForm" >
         <div class="requests">
             <div class="div-reg-wrapper">
 
                 <mat-label>מקור</mat-label>
                 <input class="mat-input-form" type="text" formControlName="resourse" required />
-                <p *ngIf="myForm.get('resourse').errors?.required" class="mat-error"> חובה למלא מקור</p>
+                <p *ngIf="myForm.get('resourse').errors?.required" class="mat-error"> חובה למלא מקור : עיר וכתובת מדויקת</p>
 
             </div>
 
@@ -15,7 +15,7 @@
 
                 <mat-label> יעד</mat-label>
                 <input type="text" class="mat-input-element" formControlName="destination" required>
-                <p *ngIf="myForm.get('destination').errors?.required" class="mat-error"> חובה למלא יעד</p>
+                <p *ngIf="myForm.get('destination').errors?.required" class="mat-error"> חובה למלא יעד : עיר וכתובת מדויקת</p>
 
             </div>
             <div class="div-reg-wrapper">

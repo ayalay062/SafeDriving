@@ -1,6 +1,6 @@
 
 
-import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +14,7 @@ import { SignInComponent } from './sign-in/sign-in.component'
 import { OffersFormComponent } from './offersComponents/offers-form/offers-form.component';
 import { RequestsComponent } from './requestsComponents/requests/requests.component';
 import { PrivateAreaComponent } from './private-area/private-area.component';
-
+import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { ApdateofferComponent } from './apdate-offer/apdate-offer.component';
 //import { LoginService } from './services/login.service';
@@ -66,7 +66,7 @@ const routes: Routes = [
     { path: 'OwnRequests', component: ViewOwnRequestsComponent },
    
     { path: 'OffersHistory', component: ViewHistoryOffersComponent },
-    { path: 'ActiveOffers', component: ViewHistoryOffersComponent },
+    { path: 'ActiveOffers', component: ViewActiveOffersComponent },
     { path: 'OwnOffers', component: ViewOwnOffersComponent }
   
       , { path: 'updateRequest/:id', component: UpdateRequestComponent }
@@ -96,9 +96,12 @@ const routes: Routes = [
     ViewHistoryRequestsComponent,
     ViewHistoryOffersComponent,
     ViewActiveOffersComponent,
+    ViewOwnRequestsComponent,
+    ViewOwnOffersComponent
   ],
   imports: [
     CommonModule,
+    BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
