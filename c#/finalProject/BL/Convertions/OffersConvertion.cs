@@ -19,10 +19,13 @@ namespace BL.Convertions
             offer.id_person = t1.id_person;
             offer.resourse = t1.resourse;
             offer.destination = t1.destination;
+            offer.resourse_city = t1.resourse_city;
+            offer.destination_city = t1.destination_city;
             offer.seats = t1.seats;
             offer.date_time = t1.date_time;
             offer.price = t1.price;
-        
+            offer.remarks = t1.remarks;
+
             offer.active = t1.active;
             return offer;
 
@@ -34,10 +37,13 @@ namespace BL.Convertions
             offer.id_person = t1.id_person;
             offer.resourse = t1.resourse;
             offer.destination = t1.destination;
+            offer.resourse_city = t1.resourse_city;
+            offer.destination_city = t1.destination_city;
             offer.seats = t1.seats;
             offer.date_time = t1.date_time;
             offer.price = t1.price;
-        
+            offer.remarks = t1.remarks;
+
             offer.active = t1.active;
             return offer;
         }

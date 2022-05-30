@@ -121,7 +121,7 @@ namespace BL
                     
             // construct your email with builder
             var email = new TransactionalEmailBuilder()
-                   .WithFrom(new SendContact("safe.driving.2022@gmail.com"))
+                   .WithFrom(new SendContact("safe.driving.2022@gmail.com","Safe Driving"))
                    .WithSubject(subject)
                    .WithHtmlPart(messageHTML)
                    .WithTo(new SendContact(to))

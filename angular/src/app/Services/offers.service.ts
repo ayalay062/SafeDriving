@@ -16,16 +16,39 @@ export class OffersService {
     //debugger;
     return this.http.post<number>(this.url + "AddOffer", offer);
   }
+  update(offer: Offer): Observable<number> {
+    //debugger;
+    return this.http.post<number>(this.url + "updateOffer", offer);
+  }
+  getNumSeatsByOfferId(offerId: number): Observable<number> {//יש הבדל אם חוזר list או arr?
 
+    return this.http.get<number>(this.url + "getNumSeatsByOfferId" + "?id=" + offerId);
+
+  }
+
+  checkSetOfferWithRequests(id: number,reqId:number): Observable<number> {
+    //debugger;
+    return this.http.get<number>(this.url + "checkSetOfferWithRequests" + "?id=" + id+ "&reqId=" + reqId);
+  }
+  ignoreOfferWithRequests(id: number,reqId:number): Observable<number> {
+    //debugger;
+    return this.http.get<number>(this.url + "ignoreOfferWithRequests" + "?id=" + id+ "&reqId=" + reqId);
+  }
 
 
   getAll(): Offer[] {
-    return //?
+    return //?F
   }
   getById(id: number) {
     //debugger;
     return this.http.get<Offer>(this.url + "getById/" + "?id=" + id);
 
+  }
+  
+
+  getHistoryByPersonId(id: number): Observable<Offer[]> {//יש הבדל אם חוזר list או arr?
+    //debugger;
+    return this.http.get<Offer[]>(this.url + "getHistoryByPersonId/" + "?id=" + id);
   }
   getByPersonId(id: number): Observable<Offer[]> {//יש הבדל אם חוזר list או arr?
     //debugger;

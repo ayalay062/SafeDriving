@@ -5,17 +5,34 @@
         <div class="requests">
             <div class="div-reg-wrapper">
 
-                <mat-label>מקור</mat-label>
-                <input class="mat-input-form" type="text" formControlName="resourse" required />
-                <p *ngIf="myForm.get('resourse').errors?.required" class="mat-error"> חובה למלא מקור : עיר וכתובת מדויקת</p>
+                <mat-label>בחר עיר מקור </mat-label>
+                <select class="mat-input-form" formControlName="resourse_city" style="height: 28px;">
+                    <option [value]="c" *ngFor="let c of travelSer.lCity"> {{c}}</option>
+                </select>
+                <p *ngIf="myForm.get('resourse_city').errors?.required" class="mat-error"> חובה לבחור עיר   </p>
 
             </div>
-
             <div class="div-reg-wrapper">
 
-                <mat-label> יעד</mat-label>
+                <mat-label>  כתובת / אזור מקור</mat-label>
+                <input class="mat-input-form" type="text" formControlName="resourse" required />
+                <p *ngIf="myForm.get('resourse').errors?.required" class="mat-error"> חובה למלא כתובת / אזור מקור </p>
+
+            </div>
+            <div class="div-reg-wrapper">
+
+                <mat-label>בחר עיר יעד </mat-label>
+                <select class="mat-input-form" formControlName="destination_city" style="height: 28px;">
+                    <option [value]="c" *ngFor="let c of travelSer.lCity"> {{c}}</option>
+                </select>
+                <p *ngIf="myForm.get('destination_city').errors?.required" class="mat-error"> חובה לבחור עיר   </p>
+
+            </div>
+            <div class="div-reg-wrapper">
+
+                <mat-label>  כתובת / אזור יעד </mat-label>
                 <input type="text" class="mat-input-element" formControlName="destination" required>
-                <p *ngIf="myForm.get('destination').errors?.required" class="mat-error"> חובה למלא יעד : עיר וכתובת מדויקת</p>
+                <p *ngIf="myForm.get('destination').errors?.required" class="mat-error"> חובה למלא תובת / אזור יעד    </p>
 
             </div>
             <div class="div-reg-wrapper">
@@ -31,8 +48,14 @@
                 <p *ngIf="myForm.get('date_time').errors?.required" class="mat-error"> חובה למלא תאריך ושעה </p>
 
             </div>
+            <div class="div-reg-wrapper" style="min-height: 50px;">
 
-         
+                <mat-label>  הערות </mat-label>
+                <input type="text" class="mat-input-element" formControlName="remarks" required>
+                <p *ngIf="myForm.get('remarks').errors?.required" class="mat-error"> חובה למלא הערות </p>
+            
+            </div>
+            
         </div>
         <br>
         
@@ -45,5 +68,7 @@
 
       
     </form>
- 
+    <!-- <div *ngIf=!offerList=null>
+        <button *ngFor="let offer of offerList" (click)="onClick(offer.id)"></button>
+    </div> -->
 </div>

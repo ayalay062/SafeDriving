@@ -39,20 +39,137 @@ namespace BL
             }
             return requests;
         }
+
+        public static int CheckSetOfferWithRequests(int id, int reqId)
+        {
+            using (var sd = new SafeDrivingEntities())
+            {
+                //בדיקה לפי מוצא ,יעד ותאריך
+                var offers = sd.offers.Include("persons").FirstOrDefault(x => x.id == id);
+                var requests = sd.requests.Include("persons").FirstOrDefault(x => x.id == reqId);
+                var travles = sd.travels.Include("requests").Where(x => x.id_offer == id);
+
+
+                var travlesSeats = 0;
+                if (travles.Any())
+                {
+                    travlesSeats = travles.Sum(x => x.requests.seats);
+
+
+                }
+
+                var offersSeats = offers.seats;
+                if (travlesSeats + requests.seats <= offersSeats)
+                {
+                    var travelReq = sd.travels.FirstOrDefault(x => x.id_request == reqId
+                    && x.id_offer == id);
+                    if (travelReq != null)
+                        return 3;
+
+                    var travelReq2 = sd.travels.FirstOrDefault(x => x.id_request == reqId);
+                    if (travelReq2 != null)
+                        return 4;
+
+
+                    var newTravel = new travels() { id_offer = id, id_request = reqId };
+                    sd.travels.Add(newTravel);
+                    requests.active = false;
+                    if (!string.IsNullOrEmpty(requests.ignore_offers)
+                    && requests.ignore_offers.Split(',').ToList().Contains(id.ToString()))
+                    {
+
+                        var ig = requests.ignore_offers.Split(',').ToList();
+                        ig.Remove(offers.id.ToString());
+                        requests.ignore_offers = String.Join(",", ig);
+                    }
+                    sd.SaveChanges();
+                    return 1;
+                }
+                return 2;
+            }
+        }
+        public static int GetNumSeatsByOfferId(int id)
+        {
+            using (var sd = new SafeDrivingEntities())
+            {
+                var travles = sd.travels.Include("requests").Where(x => x.id_offer == id);
+                var travlesSeats = 0;
+                if (travles.Any())
+                {
+                    travlesSeats = travles.Sum(x => x.requests.seats);
+
+
+                }
+                return travlesSeats;
+            }
+        }
+
+
+
+
+
+
+        public static int IgnoreOfferWithRequests(int id, int reqId)
+        {
+            using (var sd = new SafeDrivingEntities())
+            {
+                //בדיקה לפי מוצא ,יעד ותאריך
+                var offers = sd.offers.Include("persons").FirstOrDefault(x => x.id == id);
+                var requests = sd.requests.Include("persons").FirstOrDefault(x => x.id == reqId);
+
+                var travelReq = sd.travels.FirstOrDefault(x => x.id_request == reqId
+                   && x.id_offer == id);
+                if (travelReq != null)
+                {
+                    sd.travels.Remove(travelReq);
+                    requests.active = true;
+                    sd.SaveChanges();
+                    return 2;
+                }
+                else if (!string.IsNullOrEmpty(requests.ignore_offers)
+                    && requests.ignore_offers.Split(',').ToList().Contains(offers.id.ToString()))
+                {
+
+                    return 3;
+                }
+                if (!string.IsNullOrEmpty(requests.ignore_offers))
+                {
+                    var ig = requests.ignore_offers.Split(',').ToList();
+                    ig.Add(offers.id.ToString());
+                    requests.ignore_offers = String.Join(",", ig);
+                    sd.SaveChanges();
+                    return 1;
+                }
+                else
+                {
+                    requests.ignore_offers = id.ToString();
+                    sd.SaveChanges();
+                    return 1;
+
+
+
+                }
+            }
+        }
+
         // החזרת רשימת נסיעות לפי תעודת זהות
         public static List<OffersDto> GetByPersonId(int id)
         {//לבדוק אם הנסיעות פעילות
-            SafeDrivingEntities sd = new SafeDrivingEntities();
-            List<offers> offer = sd.offers.Where(x => x.id_person == id).ToList();
-            List<OffersDto> offers = new List<OffersDto>();
-            for (int i = 0; i < offer.Count; i++)
+            using (var sd = new SafeDrivingEntities())
             {
-                offers.Add(Convertions.offersConvertion.OfferToDto(offer[i]));
-            }
+                var offer = sd.offers.Where(x => x.id_person == id
+                     && x.date_time >= DateTime.Now).ToList();
+                List<OffersDto> offers = new List<OffersDto>();
+                for (int i = 0; i < offer.Count; i++)
+                {
+                    offers.Add(Convertions.offersConvertion.OfferToDto(offer[i]));
+                }
 
-            sendEmail("m058320294@gmail.com", "m058320294@gmail.com");
-            return offers;
+                // sendEmail("m058320294@gmail.com", "m058320294@gmail.com");
+                return offers;
+            }
         }
+
         //החזרת נסיעה לפי מספר נסיעה
         public static OffersDto GetById(int id)
         {
@@ -66,7 +183,7 @@ namespace BL
         public static bool deleteOffer(int id)
         {
             SafeDrivingEntities sd = new SafeDrivingEntities();
-            
+
             sd.offers.FirstOrDefault(r => r.id == id).active = false;//כך מוחקים?
             sd.SaveChanges();
             return true;//לבדוק שזה נמחק
@@ -127,12 +244,12 @@ namespace BL
 
                 var subject = "בקשת הצטרפות לנסיעה";
                 var body = "<h1 style='color: #5e9ca0; text-align: right;'>&nbsp; !שלום נהג " + personDtriver.username + "</h1>" +
-"<h1 style='color: #5e9ca0; text-align: right;'>?" + personReq.username + " האם תרצה לצרף לנסיעה את נוסע</h1> " +
-"<p style='text-align: right; ;display: inline-block;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/'>אשר</a></strong></p> " +
-"<p style='display: inline-block; text-align: left;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/ignore-request?reqid=" + reqId + "&offerid="
-+ offerId + "'>סרב</a></strong></p>";
+    "<h1 style='color: #5e9ca0; text-align: right;'>?" + personReq.username + " האם תרצה לצרף לנסיעה את נוסע</h1> " +
+    "<p style='text-align: right; ;display: inline-block;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/'>אשר</a></strong></p> " +
+    "<p style='display: inline-block; text-align: left;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/ignore-request?reqid=" + reqId + "&offerid="
+    + offerId + "'>סרב</a></strong></p>";
 
-                GeneralLogic.sendEmailAsync(personDtriver.mail, subject,body);
+                GeneralLogic.sendEmailAsync(personDtriver.mail, subject, body);
                 return true;
             }
 

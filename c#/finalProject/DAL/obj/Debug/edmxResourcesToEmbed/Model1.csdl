@@ -28,11 +28,14 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="id_person" Type="Int32" Nullable="false" />
-    <Property Name="resourse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="destination" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="resourse_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="resourse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="destination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="destination_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="seats" Type="Int32" Nullable="false" />
     <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="remarks" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="active" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="persons" Relationship="SafeDrivingModel.FK_personOffers" FromRole="offers" ToRole="persons" />
     <NavigationProperty Name="travels" Relationship="SafeDrivingModel.FK_travelsOffers" FromRole="offers" ToRole="travels" />
@@ -60,12 +63,16 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="id_person" Type="Int32" Nullable="false" />
-    <Property Name="resourse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="destination" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="resourse_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="resourse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="destination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="destination_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="seats" Type="Int32" Nullable="false" />
+    <Property Name="remarks" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="active" Type="Boolean" Nullable="false" />
     <Property Name="ignore_offers" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="email_offers" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="persons" Relationship="SafeDrivingModel.FK_personRequests" FromRole="requests" ToRole="persons" />
     <NavigationProperty Name="travels" Relationship="SafeDrivingModel.FK_travelsRequests" FromRole="requests" ToRole="travels" />
   </EntityType>

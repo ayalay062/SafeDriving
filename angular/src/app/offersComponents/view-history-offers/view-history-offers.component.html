@@ -1,1 +1,52 @@
-<p>view-history-offers works!</p>
+<div class="form-wrapper-large">
+    <h1> הסטוריית הנסיעות שלי</h1>
+
+
+    <table class="table table-striped" *ngIf="offers && offers.length > 0; else noContent">
+        <thead>
+            <tr>
+                <th>מקור</th>
+                <th>יעד</th>
+                <th>תאריך ושעה</th>
+                <th>מספר מקומות</th>
+                <th> מחיר</th>
+
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let off of offers">
+                <tr>
+
+                    <td>{{off.resourse}} - {{off.resourse_city}}</td>
+                    <td> {{off.destination}} - {{off.destination_city}}</td>
+
+                    <td> {{off.date_time | date:"dd/MM/yyyy HH:mm"}}</td>
+                    <td> {{off.seats}}</td>
+                    <td> {{off.price}}</td>
+                </tr>
+                <tr *ngFor="let oR of off.requests">
+                    <td>{{oR.driver.username}}</td>
+                </tr>
+            </ng-container>
+
+
+
+
+            <tr *ngFor="let off of offers">
+
+                <td>{{off.resourse}} - {{off.resourse_city}}</td>
+                <td> {{off.destination}} - {{off.destination_city}}</td>
+
+                <td> {{off.date_time | date:"dd/MM/yyyy HH:mm"}}</td>
+                <td> {{off.seats}}</td>
+                <td> {{off.price}}</td>
+
+
+
+            </tr>
+        </tbody>
+    </table>
+
+    <ng-template #noContent>
+        <h2> לא נמצאו הצעות נסיעה </h2>
+    </ng-template>
+</div>

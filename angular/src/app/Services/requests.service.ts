@@ -33,6 +33,28 @@ export class RequestsService {
     return this.http.get<request[]>(this.url + "getByPersonId/" + "?id=" + id);
 
   }
+  getActiveRelevantByOfferId(offerId: number): Observable<request[]> {//יש הבדל אם חוזר list או arr?
+
+    return this.http.get<request[]>(this.url + "getActiveRelevantByOfferId" + "?id=" + offerId);
+
+  }
+  getRelevantWithOffersByOfferId(offerId: number): Observable<request[]> {//יש הבדל אם חוזר list או arr?
+
+    return this.http.get<request[]>(this.url + "getRelevantWithOffersByOfferId" + "?id=" + offerId);
+
+  }
+  getDisabledWithOffersByOfferId(offerId: number): Observable<request[]> {//יש הבדל אם חוזר list או arr?
+
+    return this.http.get<request[]>(this.url + "getDisabledWithOffersByOfferId" + "?id=" + offerId);
+
+  }
+  sendEmailWithOffer(reqId: number, offerId: number): Observable<boolean> {//יש הבדל אם חוזר list או arr?
+
+    return this.http.get<boolean>(this.url + "sendEmailWithOffer" + "?id=" + offerId + "&reqId=" + reqId);
+
+  }
+
+ 
   getWithOffersByPersonId(id: number): Observable<request[]> {//יש הבדל אם חוזר list או arr?
 
     return this.http.get<request[]>(this.url + "getWithOffersByPersonId/" + "?id=" + id);

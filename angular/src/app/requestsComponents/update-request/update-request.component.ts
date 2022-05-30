@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { request } from '../../Module/request';
 import { Offer } from '../../Module/offer';
 import Swal from 'sweetalert2';
+import { TravelsService } from 'src/app/Services/travels.service';
 
 
 @Component({
@@ -15,18 +16,22 @@ import Swal from 'sweetalert2';
 export class UpdateRequestComponent implements OnInit {
 
   person = new request();
-  myForm = this.fb.group({
+  myForm = new FormGroup({
     resourse: new FormControl(null, [Validators.required]),
     destination: new FormControl(null, [Validators.required]),
     seats: new FormControl('1', [Validators.required, Validators.min(1)]),
     date_time: new FormControl(null, [Validators.required]),
+    resourse_city: new FormControl(null, [Validators.required]),
+    destination_city: new FormControl(null, [Validators.required]),
     id: new FormControl('0'),
     active: new FormControl('1'),
-    ignore_offers: new FormControl(null)
+    ignore_offers: new FormControl(null),
+    remarks: new FormControl(null, [Validators.required]),
   });
 
 
-  constructor(private fb: FormBuilder, private requests: RequestsService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private requests: RequestsService, private router: Router, private route: ActivatedRoute,
+    public travelSer: TravelsService) { }
 
   ngOnInit(): void {
 

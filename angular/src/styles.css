@@ -85,6 +85,7 @@ span:focus,
 div:focus {
     outline: none !important;
 }
+
 .form-wrapper button,
 .form-wrapper button.mat-flat-button,
 .btn-color,
@@ -111,6 +112,14 @@ div:focus {
     transition: 0.2s linear all;
     border-radius: 15px;
 }
+
+.btn-color-small {
+    min-width: 100px;
+    font-size: 12px;
+    padding: 0px 5px;
+    line-height: 20px;
+}
+
 .form-wrapper button.btn-nocolor,
 .form-wrapper button.mat-flat-button.btn-nocolor,
 .btn-nocolor,
@@ -256,8 +265,8 @@ mat-footer-row,
 }
 
 .form-wrapper-large {
-    max-width: 80%;
-    width: 80%;
+    max-width: 90%;
+    width: 90%;
     min-width: 500px;
 }
 
@@ -340,12 +349,12 @@ input:focus {
     line-height: 50px;
     width: 250px;
     margin: auto;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: #f9d71b;
 }
 
 .form-wrapper label,
-.form-wrapper-large label  {
+.form-wrapper-large label {
     font-weight: 100;
     font-size: medium;
     margin-bottom: .3rem;
@@ -358,11 +367,11 @@ input:focus {
     width: 100%;
     display: flex;
     justify-items: center;
-    
-}
-.footer-wrapper{
 
 }
+
+.footer-wrapper {}
+
 .error {
     font-size: 11px;
     color: red;
@@ -554,7 +563,7 @@ input.mat-input-element,
     border: 1px solid;
     color: #2c366e;
     font-size: 14px;
-    line-height: 26px;
+    line-height: 22px;
     direction: ltr;
     text-align: center;
     min-width: 200px;
@@ -591,7 +600,7 @@ mat-sidenav-container {
 mat-nav-list {
     display: block;
     height: calc(100vh - 75px);
-    background-color: #6a6a6ac7;
+    background-color: #6a6a6aad;
     color: white;
     text-align: right;
     direction: rtl;
@@ -658,4 +667,29 @@ mat-sidenav-container {
     min-width: 100px;
     text-align: left;
     margin-left: 10px;
+}
+
+.div-reg-wrapper p {
+    position: absolute;
+    top: 25px;
+    text-align: right;
+    right: 165px;
+}
+
+.div-reg-wrapper {
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: center;
+    min-height: 30px !important;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.div-reg-wrapper mat-label {
+    display: block;
+    min-width: 120px;
+}
+
+.div-reg-wrapper input.mat-input-element, .div-reg-wrapper .mat-input-form {
+    direction: rtl;
 }

@@ -6,11 +6,14 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_person" Type="int" Nullable="false" />
-    <Property Name="resourse" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="destination" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="resourse_city" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="resourse" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="destination" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="destination_city" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="seats" Type="int" Nullable="false" />
     <Property Name="date_time" Type="datetime" Nullable="false" />
     <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="remarks" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="persons">
@@ -34,12 +37,16 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_person" Type="int" Nullable="false" />
-    <Property Name="resourse" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="destination" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="resourse_city" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="resourse" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="destination" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="destination_city" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="seats" Type="int" Nullable="false" />
+    <Property Name="remarks" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="date_time" Type="datetime" Nullable="false" />
     <Property Name="active" Type="bit" Nullable="false" />
     <Property Name="ignore_offers" Type="varchar" MaxLength="300" />
+    <Property Name="email_offers" Type="varchar" MaxLength="300" />
   </EntityType>
   <EntityType Name="travels">
     <Key>

@@ -11,11 +11,14 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_person" Type="int" Nullable="false" />
-          <Property Name="resourse" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="destination" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="resourse_city" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="resourse" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="destination" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="destination_city" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="seats" Type="int" Nullable="false" />
           <Property Name="date_time" Type="datetime" Nullable="false" />
           <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="remarks" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="persons">
@@ -39,12 +42,16 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_person" Type="int" Nullable="false" />
-          <Property Name="resourse" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="destination" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="resourse_city" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="resourse" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="destination" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="destination_city" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="seats" Type="int" Nullable="false" />
+          <Property Name="remarks" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="date_time" Type="datetime" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="ignore_offers" Type="varchar" MaxLength="300" />
+          <Property Name="email_offers" Type="varchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="travels">
           <Key>
@@ -156,11 +163,14 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_person" Type="Int32" Nullable="false" />
-          <Property Name="resourse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="destination" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="resourse_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="resourse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="destination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="destination_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="seats" Type="Int32" Nullable="false" />
           <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="persons" Relationship="SafeDrivingModel.FK_personOffers" FromRole="offers" ToRole="persons" />
           <NavigationProperty Name="travels" Relationship="SafeDrivingModel.FK_travelsOffers" FromRole="offers" ToRole="travels" />
@@ -188,12 +198,16 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_person" Type="Int32" Nullable="false" />
-          <Property Name="resourse" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="destination" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="resourse_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="resourse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="destination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="destination_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="seats" Type="Int32" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="active" Type="Boolean" Nullable="false" />
           <Property Name="ignore_offers" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="email_offers" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="persons" Relationship="SafeDrivingModel.FK_personRequests" FromRole="requests" ToRole="persons" />
           <NavigationProperty Name="travels" Relationship="SafeDrivingModel.FK_travelsRequests" FromRole="requests" ToRole="travels" />
         </EntityType>
@@ -265,11 +279,14 @@
             <EntityTypeMapping TypeName="SafeDrivingModel.offers">
               <MappingFragment StoreEntitySet="offers">
                 <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="date_time" ColumnName="date_time" />
                 <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="destination_city" ColumnName="destination_city" />
                 <ScalarProperty Name="destination" ColumnName="destination" />
                 <ScalarProperty Name="resourse" ColumnName="resourse" />
+                <ScalarProperty Name="resourse_city" ColumnName="resourse_city" />
                 <ScalarProperty Name="id_person" ColumnName="id_person" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -294,12 +311,16 @@
           <EntitySetMapping Name="requests">
             <EntityTypeMapping TypeName="SafeDrivingModel.requests">
               <MappingFragment StoreEntitySet="requests">
+                <ScalarProperty Name="email_offers" ColumnName="email_offers" />
                 <ScalarProperty Name="ignore_offers" ColumnName="ignore_offers" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="date_time" ColumnName="date_time" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
                 <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="destination_city" ColumnName="destination_city" />
                 <ScalarProperty Name="destination" ColumnName="destination" />
                 <ScalarProperty Name="resourse" ColumnName="resourse" />
+                <ScalarProperty Name="resourse_city" ColumnName="resourse_city" />
                 <ScalarProperty Name="id_person" ColumnName="id_person" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

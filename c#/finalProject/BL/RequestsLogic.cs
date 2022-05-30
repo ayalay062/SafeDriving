@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DTO;
 using DAL;
+using System.Data.Entity.Core.Objects;
 
 namespace BL
 {
@@ -35,18 +36,21 @@ namespace BL
                 List<requests> request = sd.requests.Where(x => x.id_person == id
                 && x.active == false && x.date_time > now).ToList();
 
-                var travel = sd.travels.FirstOrDefault(x => x.id_request == id);
-                offers offer = null;
-                persons person = null;
-                if (travel != null)
-                {
-                    offer = sd.offers.FirstOrDefault(x => x.id == travel.id_offer);
-                    person = sd.persons.FirstOrDefault(x => x.id == offer.id_person);
-                }
+               
 
                 List<RequestsDto> requests = new List<RequestsDto>();
                 for (int i = 0; i < request.Count; i++)
                 {
+                    var reqId = request[i].id;
+                    var travel = sd.travels.FirstOrDefault(x => x.id_request == reqId);
+                    offers offer = null;
+                    persons person = null;
+                    if (travel != null)
+                    {
+                        offer = sd.offers.FirstOrDefault(x => x.id == travel.id_offer);
+                        person = sd.persons.FirstOrDefault(x => x.id == offer.id_person);
+                    }
+
                     var req = Convertions.RequestsConvertion.RequestToDto(request[i]);
                     req.driver = person == null ? null : Convertions.PersonConvertion.PersonToDto(person);
                     req.travel = travel == null ? null : Convertions.travelsConvertion.travelToDto(travel);
@@ -122,10 +126,13 @@ namespace BL
         {
             using (var sd = new SafeDrivingEntities())
             {
+                var tr = sd.travels.FirstOrDefault(r => r.id_request == id);
+                if (tr != null)
+                {
+                    sd.travels.Remove(tr);
+                    sd.SaveChanges();
+                }
                 var item = sd.requests.FirstOrDefault(r => r.id == id);
-                //אם מחובר לנסיעה יש למחוק + לשלוח מייל
-
-
                 sd.requests.Remove(item);
                 sd.SaveChanges();
             }
@@ -162,6 +169,181 @@ namespace BL
                 return Convertions.RequestsConvertion.RequestToDto(p1);
             }
         }
+
+
+
+        public static List<RequestsDto> getRelevantWithOffersByOfferId(int id)
+        {
+            //להוסיף לנסיעות משתנה בוליאני כד לדעת מה פעיל ולבדוק גם על פי זה
+            using (var sd = new SafeDrivingEntities())
+            {
+                //בדיקה לפי מוצא ,יעד ותאריך
+                var offers = sd.offers.FirstOrDefault(x => x.id == id);
+                var travelsReq = sd.travels.Where(x => x.id_offer == offers.id).Select(x => x.id_request);
+
+
+                var requests = sd.requests.Include("persons").Where(x => travelsReq.Contains(x.id));
+
+                var lRequests = new List<RequestsDto>();
+                foreach (var req in requests)
+                {
+                    lRequests.Add(Convertions.RequestsConvertion.RequestToDto(req));
+                }
+
+                return lRequests;
+            }
+        }
+
+
+
+        public static async Task<bool> sendEmailWithOffer(int id, int reqId)
+        {
+            //להוסיף לנסיעות משתנה בוליאני כד לדעת מה פעיל ולבדוק גם על פי זה
+            using (var sd = new SafeDrivingEntities())
+            {
+                //בדיקה לפי מוצא ,יעד ותאריך
+                var offers = sd.offers.Include("persons").FirstOrDefault(x => x.id == id);
+                var requestsVal = sd.requests.Include("persons").FirstOrDefault(x => x.id == reqId);
+
+                if (!string.IsNullOrEmpty(requestsVal.email_offers))
+                {
+                    var ig = requestsVal.email_offers.Split(',').ToList();
+                    ig.Add(offers.id.ToString());
+                    requestsVal.email_offers = String.Join(",", ig);
+
+                }
+                else
+                {
+                    requestsVal.email_offers = id.ToString();
+                }
+                sd.SaveChanges();
+
+                StringBuilder htmlBody = new StringBuilder("<div style='text-align: center; color: #2c366e; width: 500px; border: 3px solid #2c366e;font-size:18px;'>" +
+"<p>הי " + requestsVal.persons.username + "</p>" +
+"<p>נשלחה עבורך הצעת נסיעה בתאריך עיר מקור ועיר יעד זהים לבקשתך!</p> " +
+"<p>נסיעה מ" + offers.resourse + " " + offers.resourse_city + "</p> " +
+"<p>ליעד " + offers.destination + " " + offers.destination_city + "  </p> " +
+"<p>תאריך ושעת יציאה <strong>" + offers.date_time.ToString("dd/MM/yyyy HH:mm") + "</strong>   </p> " +
+"<p>מחיר הנסיעה  <strong>" + offers.price + "</strong> שקלים  </p> " +
+"<p>" + offers.remarks + " </p> " +
+"<p>פרטי הנהג " + offers.persons.mail + " | " + offers.persons.phone + " | " + offers.persons.username + "   </p> " +
+"<p>נא עדכן/י את תשובתך בהקדם על מנת להבטיח את מקומך</p> " +
+"<p><a href='http://localhost:4200/accept-request/" + offers.id + "/" + requestsVal.id + "' style=' min-width:100px; " +
+"    padding: 6px 30px;text-decoration:none;    font-size: 18px;    line-height: 28px;    margin: 10px auto; " +
+"    border: none;    cursor: pointer;  background: #2c366e;    border-radius: 0px; " +
+"    color: #ffdf00;    font-weight: 500;    border: 1px solid #2c366e; " +
+"    height: auto;    box-shadow: none;    transition: 0.2s linear all; " +
+"    border-radius: 20px;'>  כן אני רוצה</a> " +
+"<a href='http://localhost:4200/ignore-request/" + offers.id + "/" + requestsVal.id + "' style=' min-width:100px;    padding: 6px 30px;text-decoration:none; " +
+"    font-size: 18px;    line-height: 28px; " +
+"    margin:  10px auto;    border: none; " +
+"    cursor: pointer;    background: #ffdf00 ; " +
+"    border-radius: 0px;    color: #2c366e; " +
+"    font-weight: 500;    border: 1px solid #2c366e; " +
+"    height: auto;    box-shadow: none;    transition: 0.2s linear all; " +
+"    border-radius: 20px;'> לא מתאים לי</a> </p> " +
+"</div>");
+
+
+
+
+                await GeneralLogic.SendEmailMessage(requestsVal.persons.mail, htmlBody.ToString(), "הצעת נסיעה עבורך");
+
+
+                return true;
+            }
+        }
+
+        public static List<RequestsDto> getDisabledWithOffersByOfferId(int id)
+        {
+            //להוסיף לנסיעות משתנה בוליאני כד לדעת מה פעיל ולבדוק גם על פי זה
+            using (var sd = new SafeDrivingEntities())
+            {
+                //בדיקה לפי מוצא ,יעד ותאריך
+                var offers = sd.offers.FirstOrDefault(x => x.id == id);
+                var requests = sd.requests.Include("persons").Where(x => !string.IsNullOrEmpty(x.ignore_offers)
+                && x.ignore_offers.IndexOf(id.ToString()) > -1
+
+                && x.active == true);
+
+                var lRequests = new List<RequestsDto>();
+                foreach (var req in requests)
+                {
+
+                    var reqIgnores = req.ignore_offers.Split(',');
+                    if (reqIgnores.Contains(offers.id.ToString()))
+                    {
+                        lRequests.Add(Convertions.RequestsConvertion.RequestToDto(req));
+                    }
+
+
+
+                }
+
+                return lRequests;
+            }
+        }
+
+
+
+        public static List<RequestsDto> GetActiveRelevantByOfferId(int id)
+        {
+            //להוסיף לנסיעות משתנה בוליאני כד לדעת מה פעיל ולבדוק גם על פי זה
+            using (var sd = new SafeDrivingEntities())
+            {
+                //בדיקה לפי מוצא ,יעד ותאריך
+                var offers = sd.offers.FirstOrDefault(x => x.id == id);
+
+                var beginHour = offers.date_time.AddHours(-3);
+                var endHour = offers.date_time.AddHours(+3);
+
+
+
+                var requests = sd.requests.Include("persons").Where(x => x.resourse_city == offers.resourse_city
+                && x.destination_city == offers.destination_city
+                  && x.date_time >= beginHour
+                 && x.date_time <= endHour && x.active == true);
+
+                var lRequests = new List<RequestsDto>();
+                foreach (var req in requests)
+                {
+                    if (!string.IsNullOrEmpty(req.ignore_offers))
+                    {
+
+                        var reqIgnores = req.ignore_offers.Split(',');
+
+                        if (!reqIgnores.Contains(offers.id.ToString()))
+                        {
+                            var reqDto = Convertions.RequestsConvertion.RequestToDto(req);
+                            if (!string.IsNullOrEmpty(req.email_offers)
+                                && req.email_offers.Split(',').ToList().Contains(offers.id.ToString()))
+                            {
+                                reqDto.is_emailed = true;
+                            }
+
+                            lRequests.Add(reqDto);
+                        }
+
+                    }
+                    else
+                    {
+                        var reqDto = Convertions.RequestsConvertion.RequestToDto(req);
+                        if (!string.IsNullOrEmpty(req.email_offers)
+                            && req.email_offers.Split(',').ToList().Contains(offers.id.ToString()))
+                        {
+                            reqDto.is_emailed = true;
+                        }
+                        lRequests.Add(reqDto);
+                    }
+                }
+
+                return lRequests;
+            }
+        }
+
+
+
+
         public static List<OffersDto> search(RequestsDto req)
         {
             //להוסיף לנסיעות משתנה בוליאני כד לדעת מה פעיל ולבדוק גם על פי זה
@@ -202,12 +384,13 @@ namespace BL
 
                 var subject = "בקשת הצטרפות לנסיעה";
                 var body = "<h1 style='color: #5e9ca0; text-align: right;'>&nbsp; !שלום נוסע " + personReq.username + "</h1>" +
-"<h1 style='color: #5e9ca0; text-align: right;'>?" + personDtriver.username + " האם תרצה להצטרף לנסיעה עם נהג </h1> " +
-"<p style='text-align: right; ;display: inline-block;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/'>אשר</a></strong></p> " +
-"<p style='display: inline-block; text-align: left;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/ignore-request?reqid=" + offerId + "&offerid="
-+ reqId + "'>סרב</a></strong></p>";
+        "<h1 style='color: #5e9ca0; text-align: right;'>?" + personDtriver.username + " האם תרצה להצטרף לנסיעה עם נהג </h1> " +
+        "<p style='text-align: right; ;display: inline-block;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/'>אשר</a></strong></p> " +
+        "<p style='display: inline-block; text-align: left;'><strong><a style='background-color: #5e9ca0; padding: 10px; color: white;' href='http://localhost:4200/ignore-request?reqid=" + offerId + "&offerid="
+        + reqId + "'>סרב</a></strong></p>";
 
-                GeneralLogic.sendEmailAsync(personDtriver.mail, subject, body);
+
+                //GeneralLogic.sendEmailAsync(personDtriver.mail, subject, body);
                 //return true;
             }
 

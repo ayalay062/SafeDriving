@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RequestsService } from '../../Services/requests.service';
+import { OffersService } from 'src/app/Services/offers.service';
 @Component({
   selector: 'app-ignore-request',
   templateUrl: './ignore-request.component.html',
@@ -8,29 +9,35 @@ import { RequestsService } from '../../Services/requests.service';
 })
 export class IgnoreRequestComponent implements OnInit {
 
-  constructor(private route:ActivatedRoute,private requests:RequestsService) { }
-
+  isLoading = true;
+  message = '';
+  constructor(private route: ActivatedRoute, private requests: RequestsService, private offerSer: OffersService) { }
+  offerId = 0;
+  reqId = 0;
   ngOnInit(): void {
-  //   this.requests.deletefromlist().subscribe(res=>{
-  //     this.offerList=res;
-  // //debugger;
-  //      },err=>{console.log("not good :(")});
- 
-  //    this.router.navigate(['SuggestionsOffers']);
-    this.route.queryParams.subscribe((p: any) => {
-      this.requests.deletefromlist(p['reqid'],p['offerid']).subscribe(res=>{
+    this.route.queryParams.subscribe(params => {
 
-        
-      }
-        
-        ,err=>{console.log("not good :(")});
-    //  alert(p['reqid']);
-    //  alert(p['offerid']);
+      this.offerId = this.route.snapshot.params['offerId'];
+      this.reqId = this.route.snapshot.params['reqId'];
+      this.offerSer.ignoreOfferWithRequests(this.offerId, this.reqId).subscribe(x => {
 
-     
-     //Set ignore field to the request
-  });
+        if (x === 1) {
+          this.isLoading = false;
+          this.message = "ההצעה נדחתה בהצלחה!";
+        }
+        else if (x === 2) {
+          this.isLoading = false;
+          this.message = "הרשמתך בעבר התבטלה, ההצעה נדחתה";
 
+        }
+        else {
+          this.isLoading = false;
+          this.message = "דחייתך כבר נקלטה בעבר!";
+
+        }
+      });
+    });
   }
+
 
 }

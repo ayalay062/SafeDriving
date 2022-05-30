@@ -73,7 +73,8 @@ const routes: Routes = [
 
     ]
   }, { path: 'updateOffer/:id', component: UpdateOfferComponent }
-  , { path: 'ignore-request', component: IgnoreRequestComponent }
+  , { path: 'ignore-request/:offerId/:reqId', component: IgnoreRequestComponent }
+  , { path: 'accept-request/:offerId/:reqId', component: AcceptRequestComponent }
 ]
 
 

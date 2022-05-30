@@ -22,28 +22,51 @@ namespace UI.Controllers
         //     }
 
         // GET api/values/5
-        //[Route("api/offers/GetById")]
+        //[Route("/GetById")]
         //public List<OffersDto> Get(int id)
         //{
         //    return BL.OffersLogic.GetById(id);
 
         //}
         // GET api/values/5
-        [Route("api/offers/GetById")]
+        [Route("GetById")]
         public OffersDto GetId(int id)//מה לעשות?
         {
             return BL.OffersLogic.GetById(id);
 
         }
-        [Route("api/offers/GetByPersonId")]
+        [Route("GetByPersonId")]
         public IHttpActionResult GetByPersonId(int id)//מה לעשות?
         {
             return Ok(BL.OffersLogic.GetByPersonId(id));
 
         }
+        [HttpGet]
+        [Route("CheckSetOfferWithRequests")]
+        public IHttpActionResult CheckSetOfferWithRequests(int id, int reqId)//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.CheckSetOfferWithRequests(id, reqId));
+
+        }
+        [HttpGet]
+        [Route("IgnoreOfferWithRequests")]
+        public IHttpActionResult IgnoreOfferWithRequests(int id, int reqId)//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.IgnoreOfferWithRequests(id, reqId));
+
+        }
+        [HttpGet]
+        [Route("GetNumSeatsByOfferId")]
+        public IHttpActionResult GetNumSeatsByOfferId(int id)//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.GetNumSeatsByOfferId(id));
+
+        }
+
+        
         // GET api/values/5httpget
         [HttpGet]
-        [Route("api/offers/selectOfferByRequestId/{reqId}/{offerId}")]
+        [Route("selectOfferByRequestId/{reqId}/{offerId}")]
         public bool selectOfferByRequestId(int reqId, int offerId)//מה לעשות?
         {
             return BL.OffersLogic.selectOfferByRequestId(offerId, reqId);

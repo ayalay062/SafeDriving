@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using DTO;
@@ -55,6 +56,30 @@ namespace UI.Controllers
         public List<OffersDto> SearchOffersByRequest(RequestsDto req)//מה לעשות?
         {
             return BL.RequestsLogic.search(req);
+        }
+        [Route("GetActiveRelevantByOfferId")]
+        [HttpGet]
+        public List<RequestsDto> GetActiveRelevantByOfferId(int id)//מה לעשות?
+        {
+            return BL.RequestsLogic.GetActiveRelevantByOfferId(id);
+        }
+        [Route("getRelevantWithOffersByOfferId")]
+        [HttpGet]
+        public List<RequestsDto> getRelevantWithOffersByOfferId(int id)//מה לעשות?
+        {
+            return BL.RequestsLogic.getRelevantWithOffersByOfferId(id);
+        }
+        [Route("getDisabledWithOffersByOfferId")]
+        [HttpGet]
+        public List<RequestsDto> getDisabledWithOffersByOfferId(int id)//מה לעשות?
+        {
+            return BL.RequestsLogic.getDisabledWithOffersByOfferId(id);
+        }
+        [Route("sendEmailWithOffer")]
+        [HttpGet]
+        public async Task<bool> sendEmailWithOffer(int id, int reqId)//מה לעשות?
+        {
+            return await BL.RequestsLogic.sendEmailWithOffer(id, reqId);
         }
 
 

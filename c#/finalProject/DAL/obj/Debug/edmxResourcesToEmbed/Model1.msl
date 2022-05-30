@@ -5,11 +5,14 @@
       <EntityTypeMapping TypeName="SafeDrivingModel.offers">
         <MappingFragment StoreEntitySet="offers">
           <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="date_time" ColumnName="date_time" />
           <ScalarProperty Name="seats" ColumnName="seats" />
+          <ScalarProperty Name="destination_city" ColumnName="destination_city" />
           <ScalarProperty Name="destination" ColumnName="destination" />
           <ScalarProperty Name="resourse" ColumnName="resourse" />
+          <ScalarProperty Name="resourse_city" ColumnName="resourse_city" />
           <ScalarProperty Name="id_person" ColumnName="id_person" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
@@ -34,12 +37,16 @@
     <EntitySetMapping Name="requests">
       <EntityTypeMapping TypeName="SafeDrivingModel.requests">
         <MappingFragment StoreEntitySet="requests">
+          <ScalarProperty Name="email_offers" ColumnName="email_offers" />
           <ScalarProperty Name="ignore_offers" ColumnName="ignore_offers" />
           <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="date_time" ColumnName="date_time" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
           <ScalarProperty Name="seats" ColumnName="seats" />
+          <ScalarProperty Name="destination_city" ColumnName="destination_city" />
           <ScalarProperty Name="destination" ColumnName="destination" />
           <ScalarProperty Name="resourse" ColumnName="resourse" />
+          <ScalarProperty Name="resourse_city" ColumnName="resourse_city" />
           <ScalarProperty Name="id_person" ColumnName="id_person" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
