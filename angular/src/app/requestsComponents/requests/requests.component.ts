@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { request } from '../../Module/request';
 import { Offer } from '../../Module/offer';
 import Swal from 'sweetalert2';
+import { TravelsService } from 'src/app/Services/travels.service';
 
 
 
@@ -21,13 +22,16 @@ export class RequestsComponent implements OnInit {
     destination: new FormControl(null, [Validators.required]),
     seats: new FormControl('1', [Validators.required, Validators.min(1)]),
     date_time: new FormControl(null, [Validators.required]),
+    resourse_city: new FormControl(null, [Validators.required]),
+    destination_city: new FormControl(null, [Validators.required]),
     id: new FormControl('0'),
     active: new FormControl('1'),
-    ignore_offers: new FormControl(null)
+    ignore_offers: new FormControl(null),
+    remarks: new FormControl(null, [Validators.required]),
   });
 
 
-  constructor(private requests: RequestsService, private router: Router) { }
+  constructor(private requests: RequestsService, private router: Router, public travelSer: TravelsService) { }
 
   ngOnInit(): void {
   }
@@ -43,12 +47,12 @@ export class RequestsComponent implements OnInit {
 
         Swal.fire('', "ארעה שגיאה במערכת", 'error');
       }
-      else{
+      else {
         Swal.fire('', "בקשת הנסיעה נוספה בהצלחה", 'success');
         this.router.navigateByUrl('privateArea/ActiveOffers');
 
       }
-     // this.offerList = res;
+      // this.offerList = res;
       //debugger;
     }, err => { console.log("not good ") });
 
