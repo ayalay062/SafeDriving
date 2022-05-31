@@ -15,9 +15,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./private-area.component.css']
 })
 export class PrivateAreaComponent implements OnInit {
-
+  isManager = false;
   id: number;
-  zmani: number = 121212121;
   travelList: travel[] = null;
   offerList: Offer[] = null;
   requestList: request[] = null;
@@ -25,67 +24,20 @@ export class PrivateAreaComponent implements OnInit {
     , private travels: TravelsService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isManager = (localStorage.getItem('is_manager')  && localStorage.getItem('is_manager').toString()) === "true";
+
+
     if (localStorage.getItem('id') == null) {
-      Swal.fire('','"אינך מחובר, הנך מועבר לדף הכניסה"','error');
-    
+      Swal.fire('', '"אינך מחובר, הנך מועבר לדף הכניסה"', 'error');
       this.router.navigate(['signInForm']);
 
     }
     else {
       this.id = JSON.parse(localStorage.getItem('id'));
-      this.travelList;
-      this.offerList;
-      this.requestList;
+     
     }
 
   }
-  travel(): void {
-    this.travels.getByPersonId(this.zmani).subscribe(
-      res => { this.travelList = res },
-      err => { console.log("faild!") }
-    )
-  }
-  request(): void {
-    this.requests.getByPersonId(this.zmani).subscribe(
-      res => { this.requestList = res; },
-      err => { console.log("faild!") }
-    )
-  }
-  offer(): void {
-    this.offers.getByPersonId(this.zmani).subscribe(
-      res => { 
-        if(res==null)
-        
-        {alert("לא נצמאו נסיעות בתוקף")}
-        this.offerList = res; },
-      err => { console.log("faild!") }
-    )
-  }
-  change_request(id_req: number): void {//להעביר לקומפוננט אחר
-    this.router.navigate(['updateRequest', id_req]);//להעביר גם את מספר הנסיעה
-  }
-  delete_request(id_req: number): void {
-    this.requests.delete(id_req).subscribe(
-      res => { alert("נסיעתך נמחקה") },
-      err => { console.log("faild!") }
-    )
-  }
-  change_offer(id_off: number): void {//להעביר לקומפוננט אחר
-    alert(id_off);
-    this.router.navigate(['updateOffer', id_off]);//להעביר גם את מספר הנסיעה
-  }
-  delete_offer(id_off: number): void {
-    this.offers.delete(id_off).subscribe(
-      res => { alert("נסיעתך נמחקה") },
-      err => { console.log("faild!") }
-    )
-  }
-  selectOffer(){
-    this.offers.selectOfferByRequestId(100,100).subscribe(
-      res => { alert("נסיעתך ") },
-      err => { console.log("faild!") }
-    )
 
-
-  }
+  
 }

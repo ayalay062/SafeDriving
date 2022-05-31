@@ -30,9 +30,20 @@ export class IgnoreRequestComponent implements OnInit {
           this.message = "הרשמתך בעבר התבטלה, ההצעה נדחתה";
 
         }
-        else {
+        else if (x === 3) {
           this.isLoading = false;
           this.message = "דחייתך כבר נקלטה בעבר!";
+
+
+        }
+        else if (x === 4) {
+          this.isLoading = false;
+          this.message = "הנסיעה לא קיימת במערכת";
+
+        }
+        else {
+          this.isLoading = false;
+          this.message = "הבקשה לא קיימת במערכת";
 
         }
       });

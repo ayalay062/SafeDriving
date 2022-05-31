@@ -4,7 +4,7 @@
         <select class="mat-input-form" style="height: 28px;" (change)="selectOffer($event.target.value)">
 
             <option [value]="c.id" *ngFor="let c of offers">
-                {{'מ'+c.resourse_city + ' ' +c.resourse + ' - ל'+ c.destination_city+ ' ' +c.destination+ ', בשעה '+ (c.date_time|date:" HH:mm " )}}
+                {{'מ'+c.resourse_city + ' ' +c.resourse + ' - ל'+ c.destination_city+ ' ' +c.destination+ ', בתאריך '+ (c.date_time|date:"dd/MM/yyyy HH:mm " )}}
             </option>
         </select>
         <h3 style="margin-top: 10px;" *ngIf="offerTravelsSeats != 999">מספר מקומות שנרשמו <strong>{{offerTravelsSeats}}
@@ -37,7 +37,8 @@
                         (click)="sendEmailWithOffer(r.id);">שלח הצעה</button>
                     <h4 class="send-email" *ngIf="r.is_emailed">נשלחה כבר הצעה</h4>
                     <h6 class="send-email-already" *ngIf="r.email_offers && r.email_offers!== '' &&
-                    r.email_offers!== r.id.toString()">*נשלחה הצעה מנהג אחר</h6>
+                    r.email_offers!== offerId.toString()">*נשלחה הצעה מנהג אחר</h6>
+                
                 </div>
             </div>
             <div class="dis-wrap" *ngIf="disabledAequests.length > 0; else noContentReqDis;">

@@ -18,20 +18,22 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   signIn(person: person): Observable<personInfo> {
-    // const headers = new Headers();
-    //     headers.append('Access-Control-Allow-Headers', 'Content-Type');
-    //     headers.append('Access-Control-Allow-Methods', 'GET');
-    //     headers.append('Access-Control-Allow-Origin', '*');
-    //debugger;
     return this.http.get<personInfo>(this.url + "?email=" + person.mail + "&password=" + person.password);
   }
   signUp(person: person): Observable<personInfo> {
-    // const headers = new Headers();
-    //     headers.append('Access-Control-Allow-Headers', 'Content-Type');
-    //     headers.append('Access-Control-Allow-Methods', 'GET');
-    //     headers.append('Access-Control-Allow-Origin', '*');
-    debugger;
     return this.http.post<personInfo>(this.url + '/createNewPerson', person);
   }
+  getPersonStatus(): Observable<person[]> {
+    return this.http.get<person[]>(this.url + '/getPersonStatus');
+  }
+  getPersonById(id): Observable<person[]> {
+    return this.http.get<person[]>(this.url + '/GetPersonById?id=' + id);
+  }
 
+  updatePersonStatus(person: person): Observable<boolean> {
+    return this.http.post<boolean>(this.url + '/updatePersonStatus', person);
+  }
+  updatePerson(person: person): Observable<boolean> {
+    return this.http.post<boolean>(this.url + '/updatePerson', person);
+  }
 }

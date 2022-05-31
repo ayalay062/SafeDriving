@@ -35,9 +35,24 @@ export class AcceptRequestComponent implements OnInit {
           this.message = "הרשמתך כבר נקלטה בעבר!";
 
         }
-        else{
+        else if (x === 4) {
           this.isLoading = false;
           this.message = "כבר נרשמת לנסיעה אחרת";
+
+        }
+        else if (x === 5) {
+          this.isLoading = false;
+          this.message = "הנסיעה לא קיימת במערכת";
+
+        }
+        else if (x === 6) {
+          this.isLoading = false;
+          this.message = "הבקשה לא קיימת במערכת";
+
+        }
+        else if (x === 7) {
+          this.isLoading = false;
+          this.message = "הבקשה צורפה בעבר לנסיעה אחרת";
 
         }
       });

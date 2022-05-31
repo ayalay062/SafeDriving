@@ -38,6 +38,12 @@ export class RequestsService {
     return this.http.get<request[]>(this.url + "getActiveRelevantByOfferId" + "?id=" + offerId);
 
   }
+  getAllActiveRequests(): Observable<request[]> {//יש הבדל אם חוזר list או arr?
+
+    return this.http.get<request[]>(this.url + "getAllActiveRequests");
+
+  }
+  
   getRelevantWithOffersByOfferId(offerId: number): Observable<request[]> {//יש הבדל אם חוזר list או arr?
 
     return this.http.get<request[]>(this.url + "getRelevantWithOffersByOfferId" + "?id=" + offerId);

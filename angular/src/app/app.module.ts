@@ -42,6 +42,10 @@ import { ViewActiveOffersComponent } from './offersComponents/view-active-offers
 import { ViewOwnOffersComponent } from './offersComponents/view-own-offers/view-own-offers.component';
 import { ViewOwnRequestsComponent } from './requestsComponents/view-own-requests/view-own-requests.component';
 import { CommonModule } from '@angular/common';
+import { UpdatePersonComponent } from './update-person/update-person.component';
+import { AllRequestsComponent } from './requestsComponents/all-requests/all-requests.component';
+import { AllOffersComponent } from './offersComponents/all-offers/all-offers.component';
+import { SetPersonStatusComponent } from './set-person-status/set-person-status.component';
 
 
 const routes: Routes = [
@@ -53,26 +57,30 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'signInForm', component: SignInComponent },
   { path: 'signUpForm', component: SignUpFormComponent },
-
+  { path: 'updateDetails', component: UpdatePersonComponent },
+  
   {
     path: 'privateArea', component: PrivateAreaComponent,
     children: [
       {
-      path: 'offersForm', component: OffersFormComponent//,pathMatch: "full"
-    },
-    { path: 'RequestsForm', component: RequestsComponent },
-    { path: 'RequestsHistory', component: ViewHistoryRequestsComponent },
-    { path: 'ActiveRequests', component: ViewActiveRequestsComponent },
-    { path: 'OwnRequests', component: ViewOwnRequestsComponent },
-   
-    { path: 'OffersHistory', component: ViewHistoryOffersComponent },
-    { path: 'ActiveOffers', component: ViewActiveOffersComponent },
-    { path: 'OwnOffers', component: ViewOwnOffersComponent }
+        path: 'offersForm', component: OffersFormComponent//,pathMatch: "full"
+      },
+      { path: 'AllOffers', component: AllOffersComponent },
+      { path: 'AllRequests', component: AllRequestsComponent },
   
+      { path: 'RequestsForm', component: RequestsComponent },
+      { path: 'RequestsHistory', component: ViewHistoryRequestsComponent },
+      { path: 'ActiveRequests', component: ViewActiveRequestsComponent },
+      { path: 'ActiveRequests/:id', component: ViewActiveRequestsComponent },
+      { path: 'OwnRequests', component: ViewOwnRequestsComponent },
+      { path: 'OffersHistory', component: ViewHistoryOffersComponent },
+      { path: 'ActiveOffers', component: ViewActiveOffersComponent },
+      { path: 'OwnOffers', component: ViewOwnOffersComponent }
+      , { path: 'updateOffer/:id', component: UpdateOfferComponent }
       , { path: 'updateRequest/:id', component: UpdateRequestComponent }
-
+      , { path: 'personStatus', component: SetPersonStatusComponent }
     ]
-  }, { path: 'updateOffer/:id', component: UpdateOfferComponent }
+  }
   , { path: 'ignore-request/:offerId/:reqId', component: IgnoreRequestComponent }
   , { path: 'accept-request/:offerId/:reqId', component: AcceptRequestComponent }
 ]
@@ -98,7 +106,11 @@ const routes: Routes = [
     ViewHistoryOffersComponent,
     ViewActiveOffersComponent,
     ViewOwnRequestsComponent,
-    ViewOwnOffersComponent
+    ViewOwnOffersComponent,
+    UpdatePersonComponent,
+    AllRequestsComponent,
+    AllOffersComponent,
+    SetPersonStatusComponent
   ],
   imports: [
     CommonModule,

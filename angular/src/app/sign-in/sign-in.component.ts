@@ -36,6 +36,7 @@ export class SignInComponent implements OnInit {
         localStorage.setItem('id', JSON.stringify(res.Person.id));
         localStorage.setItem('tz', JSON.stringify(res.Person.tz));
         localStorage.setItem('name', res.Person.username);
+        localStorage.setItem('is_manager', res.Person.is_manager.toString());
         Swal.fire('', "ברוך/ה הבא/ה", 'success');
         this.login.userLogin.next(res.Person.username);
        // alert('sucsses' + res.Person.id)

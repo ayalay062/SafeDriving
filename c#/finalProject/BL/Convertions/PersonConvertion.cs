@@ -23,7 +23,7 @@ namespace BL.Convertions
             person.phone = personDto.phone;
             person.username = personDto.username;
             person.password = personDto.password;
-
+            person.is_manager = personDto.is_manager;
 
             return person;
         }
@@ -33,11 +33,12 @@ namespace BL.Convertions
             personDto.id = person.id;
             personDto.adress = person.adress; 
             personDto.tz = person.tz;
-            personDto.inqure = person.mail;
+            personDto.mail = person.mail;
             personDto.inqure = person.inqure;
             personDto.ok = person.ok;
             personDto.phone = person.phone;
             personDto.username = person.username;
+            personDto.is_manager = person.is_manager;
 
             return personDto;
         }

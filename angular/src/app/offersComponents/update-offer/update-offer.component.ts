@@ -15,6 +15,9 @@ import Swal from 'sweetalert2';
 export class UpdateOfferComponent implements OnInit {
   id: number = 1234;//לקבל את זה מהקומפוננט האב
   offer: Offer = null;
+  public lCity = [
+    "ירושלים", "תל אביב-יפו", "חיפה", "ראשון לציון", "פתח תקווה", "נתניה", "אשדוד", "בני ברק", "באר שבע", "חולון", "רמת גן", "אשקלון", "רחובות", "בית שמש", "בת ים", "הרצליה", "כפר סבא", "חדרה", "מודיעין- מכבים- רעות", "לוד", "מודיעין עילית", "רעננה", "נצרת", "רמלה", "רהט", "ראש העין", "הוד השרון", "ביתר עילית", "גבעתיים", "נהריה", "קריית גת", "קריית אתא", "עפולה", "אום אל-פחם", "יבנה", "אילת", "נס ציונה", "אלעד", "עכו", "רמת השרון", "טבריה", "קריית מוצקין", "כרמיאל", "טייבה", "קריית ביאליק", "נוף הגליל", "שפרעם", "נתיבות", "קריית אונו", "קריית ים", "מעלה אדומים", "צפת", "אור יהודה", "דימונה", "טמרה", "אופקים", "סחנין", "שדרות", "באקה אל-גרבייה", "יהוד-מונוסון", "באר יעקב", "גבעת שמואל", "כפר יונה", "ערד", "טירה", "טירת כרמל", "עראבה", "מגדל העמק", "קריית מלאכי", "כפר קאסם", "יקנעם עילית", "קלנסווה", "נשר", "קריית שמונה", "מעלות-תרשיחא", "אור עקיבא", "אריאל", "בית שאן"
+  ];
   requestList: request[];
   myForm = new FormGroup({
     resourse: new FormControl(null, [Validators.required]),
@@ -43,17 +46,20 @@ export class UpdateOfferComponent implements OnInit {
       });
     });
   }
+
+  back(){
+
+    this.router.navigateByUrl('privateArea/OwnOffers');
+
+
+  }
   reset() {
     this.myForm.reset('',);
   }
   onSubmit(): void {
 
-    
     var r = <Offer>this.myForm.value;
-    r.active = true;
-    var id = +localStorage.getItem('id');
 
-    r.id_person = id;
     this.offers.update(r).subscribe(res => {
       if (res == null) {
 
@@ -61,7 +67,7 @@ export class UpdateOfferComponent implements OnInit {
       }
       else {
         Swal.fire('', "הצעת הנסיעה נוספה בהצלחה", 'success');
-        this.router.navigateByUrl('privateArea/ActiveRequests/' + res);
+        this.router.navigateByUrl('privateArea/OwnOffers');
 
       }
       // this.offerList = res;
@@ -69,28 +75,6 @@ export class UpdateOfferComponent implements OnInit {
     }, err => { console.log("not good " + JSON.stringify(err)) });
 
 
-    
-    // //debugger;
-    // //מחיקת הנסיעה הקודמת
-
-    // this.offers.delete(this.id).subscribe(
-    //   res => { console.log("הנסיעה הראשונה נמחקה") },
-    //   err => { console.log("faild!") }
-    // )
-
-    // this.offer.date_time = this.myForm.value.dateTime;//תואמים? שני סוגי הזמנים?
-    // this.offer.price = this.myForm.value.price;
-    // this.offer.seats = this.myForm.value.seats;
-    // this.offer.destination = this.myForm.value.destination;
-    // this.offer.resourse = this.myForm.value.resource;
-    // this.offers.addAndGet(this.offer).subscribe(res => {
-    //   console.log("הנסיעה נוספה");
-    //   //this.requestList=res;
-    //   //בקשת נסיעות מתאימות, קבלתם והצגתם למשתמש לצורך בחירה
-    //   // debugger;
-    // }
-    //   , err => { console.log("not good :(" + err) });
-
-
+  
   }
 }

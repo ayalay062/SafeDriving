@@ -20,5 +20,10 @@ namespace DTO
         public System.DateTime date_time { get; set; }
         public double price { get; set; }
         public bool active { get; set; }
+
+
+        public List<RequestsDto> requests { get; set; }
+        public PersonDto driver { get; set; }
+        public int numSeats { get; set; }
     }
 }

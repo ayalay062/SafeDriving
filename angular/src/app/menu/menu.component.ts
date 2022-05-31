@@ -28,7 +28,8 @@ export class MenuComponent implements OnInit {
     localStorage.removeItem('id');
     localStorage.removeItem('name');
     localStorage.removeItem('tz');
-    
+    localStorage.removeItem('is_manager');
+       
     this.router.navigateByUrl('about');
 
   }

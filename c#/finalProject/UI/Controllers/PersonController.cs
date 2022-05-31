@@ -11,23 +11,23 @@ using DTO;
 namespace UI.Controllers
 {
     [RoutePrefix("api/person")]
-  //  [System.Web.Http.Cors()]
+    //  [System.Web.Http.Cors()]
     public class PersonController : ApiController
     {
         // GET api/values
-     //   public List<> Get()
-    //    {
-    //        return new string[] { "value1", "value2" };
-    //    }
+        //   public List<> Get()
+        //    {
+        //        return new string[] { "value1", "value2" };
+        //    }
 
         // GET api/signin/
-    
+
         public IHttpActionResult Get(string email, string password)
         {
             PersonInfo personInfo = new PersonInfo();
             personInfo = BL.PersonLogic.Login(email, password);
 
-            
+
             return Ok(personInfo);
         }
 
@@ -36,19 +36,36 @@ namespace UI.Controllers
         [Route("createNewPerson")]
         public PersonInfo Post(PersonDto person)
         {
-            PersonInfo result=BL.PersonLogic.signUp(person);
-                return result;
-            
+            PersonInfo result = BL.PersonLogic.signUp(person);
+            return result;
+
+        }
+        [Route("GetPersonStatus")]
+        [HttpGet]
+        public IHttpActionResult GetPersonStatus()
+        {
+
+            return Ok(BL.PersonLogic.GetPersonStatus());
+
+        }
+        [Route("GetPersonById")]
+        [HttpGet]
+        public IHttpActionResult GetPersonById(int id)
+        {
+
+            return Ok(BL.PersonLogic.GetPersonById(id));
+
         }
 
-        //// PUT api/values/5
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        
+        [Route("UpdatePerson")]
+        [HttpPost]
+        public IHttpActionResult UpdatePerson(PersonDto person)
+        {
 
-        //// DELETE api/values/5
-        //public void Delete(int id)
-        //{
-        //}
+            return Ok(BL.PersonLogic.UpdatePerson(person));
+
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 //using DAL;
@@ -35,12 +36,43 @@ namespace UI.Controllers
             return BL.OffersLogic.GetById(id);
 
         }
+        [HttpGet]
         [Route("GetByPersonId")]
         public IHttpActionResult GetByPersonId(int id)//מה לעשות?
         {
             return Ok(BL.OffersLogic.GetByPersonId(id));
 
         }
+        [HttpGet]
+        [Route("GetHistoryByPersonId")]
+        public IHttpActionResult GetHistoryByPersonId(int id)//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.GetHistoryByPersonId(id));
+
+        }
+        [HttpGet]
+        [Route("GetWithRequestsByPersonId")]
+        public IHttpActionResult GetWithRequestsByPersonId(int id)//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.GetWithRequestsByPersonId(id));
+
+        }
+        [HttpGet]
+        [Route("GetWithNoRequestsByPersonId")]
+        public IHttpActionResult GetWithNoRequestsByPersonId(int id)//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.GetWithNoRequestsByPersonId(id));
+
+        }
+        [HttpGet]
+        [Route("GetAllActiveOffers")]
+        public IHttpActionResult GetAllActiveOffers()//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.GetAllActiveOffers());
+
+        }
+        
+
         [HttpGet]
         [Route("CheckSetOfferWithRequests")]
         public IHttpActionResult CheckSetOfferWithRequests(int id, int reqId)//מה לעשות?
@@ -79,7 +111,21 @@ namespace UI.Controllers
         {
             return BL.OffersLogic.add(offer);
         }//להיכן מוחזרת רשימת ההתאמות?
+        [HttpPost]
+        [Route("UpdateOffer")]
+        public int UpdateOffer(OffersDto offer)
+        {
+            return BL.OffersLogic.UpdateOffer(offer);
+        }//להיכן מוחזרת רשימת ההתאמות?
 
+        [HttpDelete]
+        [Route("RemoveOfferWithTravels")]
+        public async Task<bool> RemoveOfferWithTravels(int id)
+        {
+            return await BL.OffersLogic.RemoveOfferWithTravels(id);
+        }//להיכן מוחזרת רשימת ההתאמות?
+
+        
         public Boolean Post(int id)
         {
             return BL.OffersLogic.deleteOffer(id);

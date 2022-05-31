@@ -1,24 +1,28 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav opened mode="side" position="end" class="side-cont-admin">
         <mat-nav-list>
-<h5> הצעות נהגים</h5>
+            <h5> הצעות נהגים</h5>
             <a mat-list-item routerLink="/privateArea/offersForm" routerLinkActive="active_link">
                 <mat-icon>local_taxi</mat-icon> &nbsp;הצעת נסיעה חדשה
             </a>
             <a mat-list-item routerLink="/privateArea/OwnOffers" routerLinkActive="active_link">
-                <mat-icon>airport_shuttle</mat-icon> &nbsp;ההצעות  שלי
-            </a>        
+                <mat-icon>airport_shuttle</mat-icon> &nbsp;ההצעות שלי
+            </a>
             <a mat-list-item routerLink="/privateArea/ActiveRequests" routerLinkActive="active_link">
-                <mat-icon>wc</mat-icon> &nbsp;בקשות להצעות שלי 
+                <mat-icon>wc</mat-icon> &nbsp;בקשות להצעות שלי
             </a>
-            <a mat-list-item routerLink="/privateArea/ActiveOffers" routerLinkActive="active_link">
+            <!-- <a mat-list-item routerLink="/privateArea/ActiveOffers" routerLinkActive="active_link">
                 <mat-icon> directions_car</mat-icon> &nbsp;הצעות כלליות פעילות
+            </a> -->
+            <a mat-list-item routerLink="/privateArea/AllOffers" routerLinkActive="active_link">
+                <mat-icon> directions_car</mat-icon> &nbsp;כל ההצעות הפעילות
             </a>
+            
             <a mat-list-item routerLink="/privateArea/OffersHistory" routerLinkActive="active_link">
-                <mat-icon>timer</mat-icon> &nbsp;הסטורית הצעות 
+                <mat-icon>timer</mat-icon> &nbsp;הסטורית הצעות שלי
             </a>
 
-           
+
             <h5> בקשות נוסעים</h5>
             <a mat-list-item routerLink="/privateArea/RequestsForm" routerLinkActive="active_link">
                 <mat-icon>transfer_within_a_station</mat-icon> &nbsp;בקשת נסיעה חדשה
@@ -26,16 +30,22 @@
             <a mat-list-item routerLink="/privateArea/OwnRequests" routerLinkActive="active_link">
                 <mat-icon>face</mat-icon> &nbsp;הבקשות שלי
             </a>
-
-
-           
-          
-       
-         
-            <a mat-list-item routerLink="/privateArea/RequestsHistory" routerLinkActive="active_link">
-                <mat-icon>timer</mat-icon> &nbsp; הסטוריית בקשות ונסיעות 
+                   <a mat-list-item routerLink="/privateArea/ActiveOffers" routerLinkActive="active_link">
+                <mat-icon> airport_shuttle</mat-icon> &nbsp;הצעות לבקשות שלי
             </a>
-         
+            <a mat-list-item routerLink="/privateArea/AllRequests" routerLinkActive="active_link">
+                <mat-icon> directions_car</mat-icon> &nbsp;כל הבקשות הפעילות
+            </a>
+            <a mat-list-item routerLink="/privateArea/RequestsHistory" routerLinkActive="active_link">
+                <mat-icon>timer</mat-icon> &nbsp; הסטוריית בקשות ונסיעות שלי
+            </a>
+            <br>
+            <h5 *ngIf="isManager">   משתמשים</h5>
+            <a mat-list-item *ngIf="isManager" routerLink="/privateArea/personStatus" routerLinkActive="active_link">
+                <mat-icon>person</mat-icon> &nbsp; עדכון סטטוס משתמשים
+            </a>
+
+            
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -51,39 +61,4 @@
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
-<!-- 
-
-
-
-<p>ברוכים הבאים לאיזור האישי</p>
-<router-outlet></router-outlet> 
-3
-<input type="button" value="להצגת כל הנסיעות" (click)="travel()"> <br/>
-<div *ngIf="travelList">
-<div *ngFor="let travel of travelList">
-    resourse:{{travel.resourse}}
-    destination:{{travel.destination}}
-    date_time{{travel.date_time}}
-</div></div> <br/>
-
-<input type="button" value="להצגת בקשות נסיעה בתוקף" (click)="request()"> <br/>
-<div *ngIf="requestList">
-<div *ngFor="let request of requestList">
-resourse:{{request.resourse}}
-destination:{{request.destination}}
-date_time{{request.date_time}}
-<input type="button" value="לשינוי פרטי נסיעה" (click)="change_request(request.id)"> 
-<input type="button" value="delete" (click)="delete_request(request.id)">
-</div> </div><br/>
-
-<input type="button" value="להצגת הצעות נסיעה בתוקף" (click)="offer()"> <br/>
-<div *ngIf="offerList">
-<div *ngFor="let offer of offerList">
-resourse:{{offer.resourse}}
-destination:{{offer.destination}}
-date_time{{offer.date_time}}
-<input type="button" value="לשינוי פרטי נסיעה" (click)="change_offer(offer.id)"> 
-<input type="button" value="delete" (click)="delete_offer(offer.id)">
- </div></div> <br/>
-
- <button (click)="selectOffer();">בדיקת שליחת מייל</button> -->
+ 

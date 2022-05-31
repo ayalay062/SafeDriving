@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -61,7 +62,9 @@ body .mat-toolbar h6,
 body span,
 body strong,
 body .mat-input-element,
-.mat-body, .mat-body-1, .mat-typography {
+.mat-body,
+.mat-body-1,
+.mat-typography {
     font-family: ass, Roboto, "Helvetica Neue", sans-serif;
     direction: rtl;
 }
@@ -112,6 +115,29 @@ div:focus {
     transition: 0.2s linear all;
     border-radius: 15px;
 }
+
+
+
+.btn-color-no
+ {
+    min-width: 200px;
+    padding: 0px 20px;
+    font-size: 16px;
+    line-height: 28px;
+    margin: auto;
+    border: none;
+    cursor: pointer;
+    background: #f9d71b;
+    border-radius: 0px;
+    color: #2c366e;
+    font-weight: 500;
+    border: 1px solid #2c366e;
+    height: auto;
+    box-shadow: none;
+    transition: 0.2s linear all;
+    border-radius: 15px;
+}
+
 
 .btn-color-small {
     min-width: 100px;
@@ -169,7 +195,8 @@ div:focus {
     color: white;
 }
 
-.bg, .bg2 {
+.bg,
+.bg2 {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -193,7 +220,7 @@ div:focus {
     left: 0;
     background-color: #f9d71b;
 } */
-.form-wrapper-overlay {
+/* .form-wrapper-overlay {
     background: #ffdf00;
     width: 100%;
     position: absolute;
@@ -201,7 +228,7 @@ div:focus {
     left: 0;
     height: calc(100% - 65px);
     opacity: 0.2;
-}
+} */
 
 .form-wrapper .mat-form-field,
 .form-wrapper-modal .mat-form-field {
@@ -501,6 +528,7 @@ td.mat-footer-cell {
     text-align: right;
     max-width: 80%;
     margin: 20px auto;
+    border-spacing: 0;
 }
 
 .table thead th {
@@ -526,7 +554,7 @@ td.mat-footer-cell {
     border: 1px solid #ddd;
     line-height: 25px;
     height: 25px;
-    padding: 0;
+    padding: 0 5px;
     margin: 0;
     text-align: center;
 }
@@ -622,7 +650,7 @@ mat-nav-list a {
     display: block;
     text-decoration: none;
     font-size: 14px;
-    line-height: 40px;
+    line-height: 32px;
     border-bottom: 1px solid #ccc;
     color: white !important;
     margin: 2px 20px;
@@ -690,6 +718,20 @@ mat-sidenav-container {
     min-width: 120px;
 }
 
-.div-reg-wrapper input.mat-input-element, .div-reg-wrapper .mat-input-form {
+.div-reg-wrapper input.mat-input-element,
+.div-reg-wrapper .mat-input-form {
     direction: rtl;
+}
+
+.btn-back {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+.form-wrapper.form-wrapper-s{
+    min-height: auto;
 }

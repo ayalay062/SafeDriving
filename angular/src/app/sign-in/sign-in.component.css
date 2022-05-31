@@ -12,6 +12,7 @@
   width: 100%;
   text-align: center;
   margin-top: 10%;
+  position: relative;
 
 }
 
@@ -19,6 +20,15 @@
   width: 100%;
   text-align: center;
   margin-top: 5%;
+  position: relative;
+
+}
+
+::ng-deep .mat-error{
+  text-align: center;
+  position: relative;
+  margin-top: -22px;
+  margin-bottom: 20px;
 }
 
 .example-full-width {

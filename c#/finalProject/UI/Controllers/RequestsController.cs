@@ -63,6 +63,15 @@ namespace UI.Controllers
         {
             return BL.RequestsLogic.GetActiveRelevantByOfferId(id);
         }
+
+        [Route("GetAllActiveRequests")]
+        [HttpGet]
+        public List<RequestsDto> GetAllActiveRequests()//מה לעשות?
+        {
+            return BL.RequestsLogic.GetAllActiveRequests();
+        }
+
+        
         [Route("getRelevantWithOffersByOfferId")]
         [HttpGet]
         public List<RequestsDto> getRelevantWithOffersByOfferId(int id)//מה לעשות?

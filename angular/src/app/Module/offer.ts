@@ -1,3 +1,4 @@
+import { person } from './person';
 import { request } from './request';
 
 export class Offer {
@@ -8,7 +9,7 @@ export class Offer {
 
      resourse_city: string;
      destination_city: string;
-
+     remarks: string;
 
 
      seats: number;
@@ -17,5 +18,7 @@ export class Offer {
      active: boolean;
 
      requests: request[];
+     driver: person;
+     numSeats: number;
 }
 

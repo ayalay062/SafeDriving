@@ -7,7 +7,7 @@
 
                 <mat-label>בחר עיר מקור </mat-label>
                 <select class="mat-input-form" formControlName="resourse_city" style="height: 28px;">
-                    <option [value]="c" *ngFor="let c of travelSer.lCity"> {{c}}</option>
+                    <option [value]="c" *ngFor="let c of lCity"> {{c}}</option>
                 </select>
                 <p *ngIf="myForm.get('resourse_city').errors?.required" class="mat-error"> חובה לבחור עיר   </p>
 
@@ -23,7 +23,7 @@
 
                 <mat-label>בחר עיר יעד </mat-label>
                 <select class="mat-input-form" formControlName="destination_city" style="height: 28px;">
-                    <option [value]="c" *ngFor="let c of travelSer.lCity"> {{c}}</option>
+                    <option [value]="c" *ngFor="let c of lCity"> {{c}}</option>
                 </select>
                 <p *ngIf="myForm.get('destination_city').errors?.required" class="mat-error"> חובה לבחור עיר   </p>
 

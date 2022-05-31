@@ -10,14 +10,6 @@ namespace BL
     {
 
 
-        //public List<drivers> drivers()//רשימת כל האנשים 
-        //{
-        //    return sd.drivers.ToList();
-        //}
-        //public List<begin> names()//רשימת כל האנשים 
-        //{
-        //    return sd.begin.ToList();
-        //}
 
         public static PersonInfo Login(string email, string password)
         {
@@ -45,6 +37,42 @@ namespace BL
             return result;
         }
 
+        public static List<PersonDto> GetPersonStatus()
+        {
+
+            PersonInfo result = new PersonInfo();
+
+            using (var sd = new SafeDrivingEntities())
+            {
+                var pr = sd.persons.Where(x => x.is_manager == false).ToList();
+
+                var personDtoList = new List<PersonDto>();
+                for (int i = 0; i < pr.Count; i++)
+                {
+                    personDtoList.Add(Convertions.PersonConvertion.PersonToDto(pr[i]));
+                }
+                return personDtoList;
+            }
+
+        }
+
+        public static PersonDto GetPersonById(int id)
+        {
+
+            PersonInfo result = new PersonInfo();
+
+            using (var sd = new SafeDrivingEntities())
+            {
+                var pr = sd.persons.FirstOrDefault(x => x.id == id);
+
+
+                return Convertions.PersonConvertion.PersonToDto(pr);
+
+            }
+
+        }
+
+
         public static PersonInfo signUp(PersonDto personDto)
         {
             PersonInfo result = new PersonInfo();
@@ -64,5 +92,28 @@ namespace BL
             sd.SaveChanges();
             return result;
         }
+
+
+
+        public static bool UpdatePerson(PersonDto personDto)
+        {
+
+            using (var sd = new SafeDrivingEntities())
+            {
+                var pr = sd.persons.FirstOrDefault(x => x.id == personDto.id);
+                pr.adress = personDto.adress;
+                pr.tz = personDto.tz;
+                pr.inqure = personDto.inqure;
+                pr.mail = personDto.mail;
+                pr.ok = personDto.ok;
+                pr.phone = personDto.phone;
+                pr.username = personDto.username;
+
+                sd.SaveChanges();
+            }
+            return true;
+        }
+
+
     }
 }

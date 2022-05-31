@@ -10,7 +10,6 @@ using System.Data.Entity.Core.Objects;
 namespace BL
 {
     public class RequestsLogic
-
     {
         // החזרת רשימת נסיעות לפי תעודת זהות
         public static List<RequestsDto> GetByPersonId(int id)
@@ -36,7 +35,7 @@ namespace BL
                 List<requests> request = sd.requests.Where(x => x.id_person == id
                 && x.active == false && x.date_time > now).ToList();
 
-               
+
 
                 List<RequestsDto> requests = new List<RequestsDto>();
                 for (int i = 0; i < request.Count; i++)
@@ -61,8 +60,6 @@ namespace BL
                 return requests;
             }
         }
-
-
         // החזרת רשימת נסיעות לפי תעודת זהות
         public static List<RequestsDto> GetHistoryByPersonId(int id)
         {//לבדוק אם הנסיעות פעילות
@@ -109,7 +106,6 @@ namespace BL
                 return requests;
             }
         }
-
         //החזרת נסיעה לפי מספר נסיעה
         public static RequestsDto GetById(int id)
         {
@@ -154,7 +150,6 @@ namespace BL
                 return Convertions.RequestsConvertion.RequestToDto(fromDB);
             }
         }
-
         //הכנסת נסיעה
         public static RequestsDto add(RequestsDto req)
         {
@@ -169,8 +164,6 @@ namespace BL
                 return Convertions.RequestsConvertion.RequestToDto(p1);
             }
         }
-
-
 
         public static List<RequestsDto> getRelevantWithOffersByOfferId(int id)
         {
@@ -193,8 +186,6 @@ namespace BL
                 return lRequests;
             }
         }
-
-
 
         public static async Task<bool> sendEmailWithOffer(int id, int reqId)
         {
@@ -275,16 +266,37 @@ namespace BL
                     {
                         lRequests.Add(Convertions.RequestsConvertion.RequestToDto(req));
                     }
-
-
-
                 }
 
                 return lRequests;
             }
         }
 
+        public static List<RequestsDto> GetAllActiveRequests()
+        {
+            //להוסיף לנסיעות משתנה בוליאני כד לדעת מה פעיל ולבדוק גם על פי זה
+            using (var sd = new SafeDrivingEntities())
+            {
+                //בדיקה לפי מוצא ,יעד ותאריך
 
+
+                var requests = sd.requests.Include("persons").Where(x =>
+                   x.date_time >= DateTime.Today
+                && x.active == true);
+
+                var lRequests = new List<RequestsDto>();
+                foreach (var req in requests)
+                {
+
+                    var reqDto = Convertions.RequestsConvertion.RequestToDto(req);
+                    reqDto.driver = Convertions.PersonConvertion.PersonToDto(req.persons);
+                    lRequests.Add(reqDto);
+
+                }
+
+                return lRequests;
+            }
+        }
 
         public static List<RequestsDto> GetActiveRelevantByOfferId(int id)
         {
@@ -297,11 +309,9 @@ namespace BL
                 var beginHour = offers.date_time.AddHours(-3);
                 var endHour = offers.date_time.AddHours(+3);
 
-
-
                 var requests = sd.requests.Include("persons").Where(x => x.resourse_city == offers.resourse_city
                 && x.destination_city == offers.destination_city
-                  && x.date_time >= beginHour
+                  && x.date_time >= beginHour && x.id_person != offers.id_person
                  && x.date_time <= endHour && x.active == true);
 
                 var lRequests = new List<RequestsDto>();
@@ -309,7 +319,6 @@ namespace BL
                 {
                     if (!string.IsNullOrEmpty(req.ignore_offers))
                     {
-
                         var reqIgnores = req.ignore_offers.Split(',');
 
                         if (!reqIgnores.Contains(offers.id.ToString()))
@@ -341,9 +350,6 @@ namespace BL
             }
         }
 
-
-
-
         public static List<OffersDto> search(RequestsDto req)
         {
             //להוסיף לנסיעות משתנה בוליאני כד לדעת מה פעיל ולבדוק גם על פי זה
@@ -369,8 +375,6 @@ namespace BL
             return offers;
         }
 
-
-
         public static void selectOfferByRequestId(int offerId, int reqId)
         {
             using (SafeDrivingEntities sd = new SafeDrivingEntities())
@@ -395,6 +399,7 @@ namespace BL
             }
 
         }
+
         public static void UpdateRequestIgnoreOffers(int reqId, int offerId)
         {
             using (SafeDrivingEntities sd = new SafeDrivingEntities())
