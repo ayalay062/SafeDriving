@@ -39,25 +39,31 @@ export class SignInComponent implements OnInit {
         localStorage.setItem('is_manager', res.Person.is_manager.toString());
         Swal.fire('', "ברוך/ה הבא/ה", 'success');
         this.login.userLogin.next(res.Person.username);
-       // alert('sucsses' + res.Person.id)
+        // alert('sucsses' + res.Person.id)
         this.router.navigate(['privateArea']);
       } else {
-        if (res.errorType == ErrorTypes.errorEmail) {
+        if (res.ErrorType === ErrorTypes.errorEmail) {
           Swal.fire('', "כתובת אימייל לא קיימת", 'error');
         }
         else {
-          Swal.fire('',  "סיסמה שגויה", 'error');
-         
-        }
-      }
+          if (res.ErrorType === ErrorTypes.errorDisable) {
+            Swal.fire('', "המשתמש חסום, פנה למנהל המערכת", 'error');
+          }
 
+          else {
+            Swal.fire('', "סיסמה שגויה", 'error');
+
+          }
+        }
+
+      }
 
       //debugger;
     }, err => {
       Swal.fire('', "שגיאת שרת", 'error');
-   
-     
-    
+
+
+
     });
   }
   new(): void {

@@ -30,7 +30,12 @@ namespace BL
                     result.ErrorType = ErrorTypes.errorPassword;
                     return result;
                 }
-
+                if (sd.persons.FirstOrDefault(x => x.ok == true  && x.mail == email && x.password == password) == null)
+                {
+                    result.Status = false;
+                    result.ErrorType = ErrorTypes.errorDisable;
+                    return result;
+                }
                 result.Person = Convertions.PersonConvertion.PersonToDto(sd.persons.FirstOrDefault(x => x.password == password && x.mail == email));
                 result.Status = true;
             }

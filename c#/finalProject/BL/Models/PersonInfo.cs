@@ -19,13 +19,9 @@ namespace BL
     }
     public enum ErrorTypes
     {
-       // [Description("Email is not Exist")]
         errorEmail,
-
-     //   [Description("Password is UnCorrect")]
         errorPassword,
-
-      //  [Description("User Already Exist")]
+        errorDisable,
         personAlreadyExist
     }
 }

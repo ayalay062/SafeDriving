@@ -282,7 +282,7 @@ namespace BL
 
                 var requests = sd.requests.Include("persons").Where(x =>
                    x.date_time >= DateTime.Today
-                && x.active == true);
+                && x.active == true && x.persons.ok == true);
 
                 var lRequests = new List<RequestsDto>();
                 foreach (var req in requests)

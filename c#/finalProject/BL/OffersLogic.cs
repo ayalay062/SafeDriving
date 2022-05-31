@@ -257,7 +257,7 @@ namespace BL
             using (var sd = new SafeDrivingEntities())
             {
                 var offerData = sd.offers.Include("persons").Where(x => x.active == true
-                     && x.date_time >= DateTime.Now).ToList();
+                     && x.date_time >= DateTime.Now && x.persons.ok == true).ToList();
 
                 var offers = new List<OffersDto>();
                 for (int i = 0; i < offerData.Count; i++)
