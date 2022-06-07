@@ -47,7 +47,8 @@
       </div>
       <div class="div-reg-wrapper">
         <mat-label> תאריך ושעה</mat-label>
-        <input type="datetime-local" class="mat-input-element" formControlName="date_time" required>
+        <input type="datetime-local" class="mat-input-element" formControlName="date_time" required
+        min="{{today | date:'yyyy-MM-dd'}}">
         <p *ngIf="myForm.get('date_time').errors?.required" class="mat-error"> חובה למלא תאריך ושעה </p>
 
       </div>
@@ -76,13 +77,5 @@
 
 
   </form>
-  <div *ngIf=!requestList=null>
-    <button *ngFor="let request of requestList" (click)="onClick(request.id)"></button>
-  </div>
-</div>
-<!-- <div *ngIf="" >
-  
-  <button mat-flat-button color="warn" (click)="request()"> >RESET</button>
-  <button  *ngFor="let request of requestlist"  (click)="request()"></button>
 
-</div> -->
+</div>

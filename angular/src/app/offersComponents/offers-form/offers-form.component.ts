@@ -14,10 +14,10 @@ import { TravelsService } from 'src/app/Services/travels.service';
   styleUrls: ['./offers-form.component.css']
 })
 export class OffersFormComponent implements OnInit {
-  requestList: request[];
   public lCity = [
     "ירושלים", "תל אביב-יפו", "חיפה", "ראשון לציון", "פתח תקווה", "נתניה", "אשדוד", "בני ברק", "באר שבע", "חולון", "רמת גן", "אשקלון", "רחובות", "בית שמש", "בת ים", "הרצליה", "כפר סבא", "חדרה", "מודיעין- מכבים- רעות", "לוד", "מודיעין עילית", "רעננה", "נצרת", "רמלה", "רהט", "ראש העין", "הוד השרון", "ביתר עילית", "גבעתיים", "נהריה", "קריית גת", "קריית אתא", "עפולה", "אום אל-פחם", "יבנה", "אילת", "נס ציונה", "אלעד", "עכו", "רמת השרון", "טבריה", "קריית מוצקין", "כרמיאל", "טייבה", "קריית ביאליק", "נוף הגליל", "שפרעם", "נתיבות", "קריית אונו", "קריית ים", "מעלה אדומים", "צפת", "אור יהודה", "דימונה", "טמרה", "אופקים", "סחנין", "שדרות", "באקה אל-גרבייה", "יהוד-מונוסון", "באר יעקב", "גבעת שמואל", "כפר יונה", "ערד", "טירה", "טירת כרמל", "עראבה", "מגדל העמק", "קריית מלאכי", "כפר קאסם", "יקנעם עילית", "קלנסווה", "נשר", "קריית שמונה", "מעלות-תרשיחא", "אור עקיבא", "אריאל", "בית שאן"
   ];
+  today = new Date();
   offer = new Offer();
   id: number;
   myForm = new FormGroup({
@@ -29,7 +29,7 @@ export class OffersFormComponent implements OnInit {
     destination_city: new FormControl(null, [Validators.required]),
     id: new FormControl('0'),
     active: new FormControl('1'),
-    ignore_offers: new FormControl(null),
+    ignore_offers: new FormControl(''),
     remarks: new FormControl(null, [Validators.required]),
     price: new FormControl('0', [Validators.required, Validators.min(0)]),
   });
@@ -38,7 +38,7 @@ export class OffersFormComponent implements OnInit {
     private fb: FormBuilder, public travelSer: TravelsService) { }
 
   ngOnInit(): void {
-   
+   this.today = new Date();
   }
 
   reset() {

@@ -12,7 +12,8 @@ import { TravelsService } from 'src/app/Services/travels.service';
 export class AllOffersComponent implements OnInit {
   offers: Offer[] = [];
   offerSource: Offer[] = [];
-  dateFilter: Date = new Date();
+  dateFilter: Date ;
+  today = new Date();
   selectedSourceCity = '';
   selectedDestCity = '';
   public lCity = [
@@ -37,7 +38,7 @@ export class AllOffersComponent implements OnInit {
     }
   }
   clear() {
-    this.dateFilter = new Date();
+    this.dateFilter = null;
     this.selectedSourceCity = '';
     this.selectedDestCity = '';
     this.offers = [...this.offerSource];

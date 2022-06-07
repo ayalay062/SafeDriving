@@ -1,7 +1,7 @@
 <div class="form-wrapper-large">
     <h1 style="width: 400px;"> רשימת בקשות מתאימות להצעה</h1>
     <div *ngIf="offers && offers.length > 0; else noContent;">
-        <select class="mat-input-form" style="height: 28px;" (change)="selectOffer($event.target.value)">
+        <select class="mat-input-form" style="height: 28px;" [(ngModel)]="offerId" (change)="selectOffer($event.target.value)">
 
             <option [value]="c.id" *ngFor="let c of offers">
                 {{'מ'+c.resourse_city + ' ' +c.resourse + ' - ל'+ c.destination_city+ ' ' +c.destination+ ', בתאריך '+ (c.date_time|date:"dd/MM/yyyy HH:mm " )}}
@@ -35,7 +35,7 @@
 
                     <button *ngIf="!r.is_emailed" class="btn-color btn-color-small "
                         (click)="sendEmailWithOffer(r.id);">שלח הצעה</button>
-                    <h4 class="send-email" *ngIf="r.is_emailed">נשלחה כבר הצעה</h4>
+                    <h4 class="send-email" *ngIf="r.is_emailed">נשלחה הצעה למייל</h4>
                     <h6 class="send-email-already" *ngIf="r.email_offers && r.email_offers!== '' &&
                     r.email_offers!== offerId.toString()">*נשלחה הצעה מנהג אחר</h6>
                 

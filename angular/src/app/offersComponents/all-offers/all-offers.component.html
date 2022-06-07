@@ -4,10 +4,10 @@
         <div class="filter">
             <label>תאריך</label>
             <input class="mat-input-form" [ngModel]="dateFilter|date:'yyyy-MM-dd'"
-            
+            min="{{today | date:'yyyy-MM-dd'}}"
             (change)="dateFilter = $event.target.value" type="date" placeholder="תאריך">
             <label>מקור</label>
-            <select class="mat-input-form"  [ngModel]="selectedSourceCity|date:'yyyy-MM-dd'" style="height: 34px;">
+            <select class="mat-input-form"  [(ngModel)]="selectedSourceCity" style="height: 34px;">
                 <option [value]="c" *ngFor="let c of lCity"> {{c}}</option>
             </select>
             <label>יעד</label>
@@ -20,7 +20,8 @@
         <div class="cont-wrap">
             <div class="active-wrap">
                 <div class="cont-data" *ngFor="let r of offers">
-                    <h2>{{r.driver.username + ' | ' +r.driver.phone }}</h2>
+                    <h2 *ngIf="r.id_person != personId">{{r.driver.username + ' | ' +r.driver.phone }}</h2>
+                    <h2  *ngIf="r.id_person == personId">את/ה</h2>
                     <h4 class="strong"> {{'מ'+r.resourse_city + ' - ' +r.resourse}}</h4>
                     <h4 class="strong"> {{'ל'+ r.destination_city+ ' - ' +r.destination}}</h4>
                     <h4>{{'בתאריך '+ (r.date_time|date:"dd/MM/yyyy " )}}</h4>

@@ -36,7 +36,7 @@ export class ViewActiveRequestsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       var pId = +localStorage.getItem('id');
-      this.offerId = this.route.snapshot.params['id'];
+      this.offerId = +this.route.snapshot.params['id'];
 
       if (this.offerId && this.offerId !== 0) {
         this.getRequests();

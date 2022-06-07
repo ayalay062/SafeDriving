@@ -21,8 +21,8 @@
                     <h4>מחיר <strong>{{r.price}}</strong> ש"ח </h4>
                     <h4>{{r.remarks}}</h4>
                     <button *ngIf="!r.is_emailed" class="btn-color btn-color-small "
-                    (click)="sendEmailWithOffer(r.id);">שלח הצעה</button>
-                <h4 class="send-email" *ngIf="r.is_emailed">נשלחה כבר הצעה</h4>
+                    (click)="sendEmailWithOffer(r.id);">שלח בקשה</button>
+                <h4 class="send-email" *ngIf="r.is_emailed"> נשלחה בקשה למייל</h4>
                 </div>
             </div>s
         </div>

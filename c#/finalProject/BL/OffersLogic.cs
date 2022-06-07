@@ -37,7 +37,7 @@ namespace BL
                 off.destination = offer.destination;
                 off.destination_city = offer.destination_city;
                 off.seats = offer.seats;
-
+                off.date_time = offer.date_time;
                 sd.SaveChanges();
             }
 
