@@ -23,7 +23,6 @@ namespace BL
             {
                 requests.Add(Convertions.RequestsConvertion.RequestToDto(request[i]));
             }
-
             return requests;
         }
         // החזרת רשימת נסיעות סגורות לפי תעודת זהות
@@ -209,7 +208,7 @@ namespace BL
                 }
                 sd.SaveChanges();
 
-                StringBuilder htmlBody = new StringBuilder("<div style='text-align: center; color: #2c366e; width: 500px; border: 3px solid #2c366e;font-size:18px;'>" +
+                StringBuilder htmlBody = new StringBuilder("<div style='text-align: center; color: #2c366e; width: 550px; border: 3px solid #2c366e;font-size:18px;'>" +
 "<p>הי " + requestsVal.persons.username + "</p>" +
 "<p>נשלחה עבורך הצעת נסיעה בתאריך עיר מקור ועיר יעד זהים לבקשתך!</p> " +
 "<p>נסיעה מ" + offers.resourse + " " + offers.resourse_city + "</p> " +
@@ -244,6 +243,56 @@ namespace BL
                 return true;
             }
         }
+        public static async Task<bool> SendEmailToOffer(int id, int reqId)
+        {
+            //להוסיף לנסיעות משתנה בוליאני כד לדעת מה פעיל ולבדוק גם על פי זה
+            using (var sd = new SafeDrivingEntities())
+            {
+                //בדיקה לפי מוצא ,יעד ותאריך
+                var offers = sd.offers.Include("persons").FirstOrDefault(x => x.id == id);
+                var requestsVal = sd.requests.Include("persons").FirstOrDefault(x => x.id == reqId);
+
+                if (!string.IsNullOrEmpty(offers.email_requests))
+                {
+                    var ig = offers.email_requests.Split(',').ToList();
+                    ig.Add(reqId.ToString());
+                    offers.email_requests = String.Join(",", ig);
+
+                }
+                else
+                {
+                    offers.email_requests = id.ToString();
+                }
+                sd.SaveChanges();
+
+                StringBuilder htmlBody = new StringBuilder("<div style='text-align: center; color: #2c366e; width: 550px; border: 3px solid #2c366e;font-size:18px;'>" +
+"<p>הי " + offers.persons.username + "</p>" +
+"<p>נשלחה עבורך בקשת נסיעה בתאריך עיר מקור ועיר יעד זהים להצעתך!</p> " +
+"<p>נסיעה מ" + requestsVal.resourse + " " + requestsVal.resourse_city + "</p> " +
+"<p>ליעד " + requestsVal.destination + " " + requestsVal.destination_city + "  </p> " +
+"<p>תאריך ושעת יציאה <strong>" + requestsVal.date_time.ToString("dd/MM/yyyy HH:mm") + "</strong>   </p> " +
+"<p>" + requestsVal.remarks + " </p> " +
+"<p>פרטי הנוסע " + requestsVal.persons.mail + " | " + requestsVal.persons.phone + " | " + requestsVal.persons.username + "   </p> " +
+"<p>נא עדכן/י את תשובתך בהקדם על מנת ליעל את המערכת</p> " +
+"<p><a href='http://localhost:4200/privateArea/ActiveRequests/" + offers.id  + "' style=' min-width:100px; " +
+"    padding: 6px 30px;text-decoration:none;    font-size: 18px;    line-height: 28px;    margin: 10px auto; " +
+"    border: none;    cursor: pointer;  background: #2c366e;    border-radius: 0px; " +
+"    color: #ffdf00;    font-weight: 500;    border: 1px solid #2c366e; " +
+"    height: auto;    box-shadow: none;    transition: 0.2s linear all; " +
+"    border-radius: 20px;'>  כניסה למערכת</a></p> " +
+"</div>");
+
+
+
+
+                await GeneralLogic.SendEmailMessage(offers.persons.mail, htmlBody.ToString(), "בקשה להצטרפות לנסיעה שלך");
+
+
+                return true;
+            }
+        }
+
+        
 
         public static List<RequestsDto> getDisabledWithOffersByOfferId(int id)
         {

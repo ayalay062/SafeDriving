@@ -4,6 +4,7 @@
     <EntitySetMapping Name="offers">
       <EntityTypeMapping TypeName="SafeDrivingModel.offers">
         <MappingFragment StoreEntitySet="offers">
+          <ScalarProperty Name="email_requests" ColumnName="email_requests" />
           <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="remarks" ColumnName="remarks" />
           <ScalarProperty Name="price" ColumnName="price" />

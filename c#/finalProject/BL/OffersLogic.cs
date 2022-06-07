@@ -282,6 +282,45 @@ namespace BL
                 return offers;
             }
         }
+        public static List<OffersDto> GetAllActiveOffersByReqId(int id)
+        {
+
+            using (var sd = new SafeDrivingEntities())
+            {
+       
+                var req = sd.requests.FirstOrDefault(x => x.id == id);
+
+                var beginHour = req.date_time.AddHours(-3);
+                var endHour = req.date_time.AddHours(+3);
+
+                var offerData = sd.offers.Include("persons").Where(x => x.resourse_city == req.resourse_city
+                && x.destination_city == req.destination_city
+                  && x.date_time >= beginHour && x.id_person != req.id_person
+                 && x.date_time <= endHour && x.active == true && x.persons.ok == true).ToList();
+
+
+
+                var offers = new List<OffersDto>();
+                for (int i = 0; i < offerData.Count; i++)
+                {
+                    var off = Convertions.offersConvertion.OfferToDto(offerData[i]);
+                    off.requests = new List<RequestsDto>();
+                    off.numSeats = GetNumSeatsByOfferId(offerData[i].id);
+                    off.driver = Convertions.PersonConvertion.PersonToDto(offerData[i].persons);
+                    if (!string.IsNullOrEmpty(off.email_requests)
+                               && off.email_requests.Split(',').ToList().Contains(id.ToString()))
+                    {
+                        off.is_emailed = true;
+                    }
+                    offers.Add(off);
+
+
+                }
+
+
+                return offers;
+            }
+        }
 
 
         public static List<OffersDto> GetWithNoRequestsByPersonId(int id)

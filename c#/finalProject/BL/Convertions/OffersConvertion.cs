@@ -25,6 +25,7 @@ namespace BL.Convertions
             offer.date_time = t1.date_time;
             offer.price = t1.price;
             offer.remarks = t1.remarks;
+            offer.email_requests = t1.email_requests;
 
             offer.active = t1.active;
             return offer;
@@ -43,7 +44,8 @@ namespace BL.Convertions
             offer.date_time = t1.date_time;
             offer.price = t1.price;
             offer.remarks = t1.remarks;
-
+            offer.email_requests = t1.email_requests;
+            
             offer.active = t1.active;
             return offer;
         }

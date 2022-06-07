@@ -71,8 +71,15 @@ namespace UI.Controllers
             return Ok(BL.OffersLogic.GetAllActiveOffers());
 
         }
-        
+        [HttpGet]
+        [Route("GetAllActiveOffersByReqId")]
+        public IHttpActionResult GetAllActiveOffersByReqId(int id)//מה לעשות?
+        {
+            return Ok(BL.OffersLogic.GetAllActiveOffersByReqId(id));
 
+        }
+
+        
         [HttpGet]
         [Route("CheckSetOfferWithRequests")]
         public IHttpActionResult CheckSetOfferWithRequests(int id, int reqId)//מה לעשות?

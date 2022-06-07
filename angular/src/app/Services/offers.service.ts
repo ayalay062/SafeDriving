@@ -25,7 +25,10 @@ export class OffersService {
     //debugger;
     return this.http.delete<boolean>(this.url + "removeOfferWithTravels?id=" + id);
   }
-
+  getAllActiveOffersByReqId(id: number): Observable<Offer[]> {
+    //debugger;
+    return this.http.get<Offer[]>(this.url + "getAllActiveOffersByReqId?id=" + id);
+  }
 
   getNumSeatsByOfferId(offerId: number): Observable<number> {//יש הבדל אם חוזר list או arr?
 

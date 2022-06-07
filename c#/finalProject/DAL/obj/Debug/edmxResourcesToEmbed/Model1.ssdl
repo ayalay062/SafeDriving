@@ -15,6 +15,7 @@
     <Property Name="price" Type="float" Nullable="false" />
     <Property Name="remarks" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="email_requests" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="persons">
     <Key>

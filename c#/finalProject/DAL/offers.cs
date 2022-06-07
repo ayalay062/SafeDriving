@@ -31,6 +31,7 @@ namespace DAL
         public double price { get; set; }
         public string remarks { get; set; }
         public bool active { get; set; }
+        public string email_requests { get; set; }
     
         public virtual persons persons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

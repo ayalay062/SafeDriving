@@ -20,5 +20,6 @@ export class Offer {
      requests: request[];
      driver: person;
      numSeats: number;
+     is_emailed: boolean;
 }
 

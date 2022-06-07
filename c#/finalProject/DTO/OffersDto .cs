@@ -20,10 +20,13 @@ namespace DTO
         public System.DateTime date_time { get; set; }
         public double price { get; set; }
         public bool active { get; set; }
+        public string email_requests { get; set; }
 
-
+    
         public List<RequestsDto> requests { get; set; }
         public PersonDto driver { get; set; }
         public int numSeats { get; set; }
+        public bool is_emailed { get; set; }
+
     }
 }

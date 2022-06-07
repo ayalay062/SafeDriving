@@ -53,7 +53,7 @@ h2 {
 
 .cont-data {
     width: 200px;
-    height: 280px;
+    height: 300px;
     background: #ffffff54;
     box-shadow: 0 0 8px 1px rgb(0 0 0 / 20%);
     margin: 5px;
@@ -62,7 +62,7 @@ h2 {
 
 }
 
-.cont-data h2 {
+.cont-data h3 {
     background-color: #f9d71b;
     line-height: 36px;
     color: white;
@@ -75,4 +75,9 @@ h2 {
 h4.strong {
     font-weight: bold;
     /* margin: 4px auto; */
+}
+.send-email {
+    background: #f9d71b29;
+    max-width: 110px;
+    margin: auto!important;
 }

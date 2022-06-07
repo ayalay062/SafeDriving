@@ -90,8 +90,15 @@ namespace UI.Controllers
         {
             return await BL.RequestsLogic.sendEmailWithOffer(id, reqId);
         }
+        [Route("SendEmailToOffer")]
+        [HttpGet]
+        public async Task<bool> SendEmailToOffer(int id, int reqId)//מה לעשות?
+        {
+            return await BL.RequestsLogic.SendEmailToOffer(id, reqId);
+        }
 
 
+        
         [HttpPost]
         [Route("AddRequest")]
         public IHttpActionResult AddRequest(RequestsDto req)

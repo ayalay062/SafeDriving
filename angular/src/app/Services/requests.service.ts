@@ -33,6 +33,11 @@ export class RequestsService {
     return this.http.get<request[]>(this.url + "getByPersonId/" + "?id=" + id);
 
   }
+  sendEmailToOffer(reqId: number, offerId: number): Observable<boolean> {//יש הבדל אם חוזר list או arr?
+
+    return this.http.get<boolean>(this.url + "sendEmailToOffer" + "?id=" + offerId + "&reqId=" + reqId);
+
+  }
   getActiveRelevantByOfferId(offerId: number): Observable<request[]> {//יש הבדל אם חוזר list או arr?
 
     return this.http.get<request[]>(this.url + "getActiveRelevantByOfferId" + "?id=" + offerId);

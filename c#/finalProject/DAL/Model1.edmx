@@ -20,6 +20,7 @@
           <Property Name="price" Type="float" Nullable="false" />
           <Property Name="remarks" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="email_requests" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="persons">
           <Key>
@@ -172,6 +173,7 @@
           <Property Name="price" Type="Double" Nullable="false" />
           <Property Name="remarks" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="email_requests" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="persons" Relationship="SafeDrivingModel.FK_personOffers" FromRole="offers" ToRole="persons" />
           <NavigationProperty Name="travels" Relationship="SafeDrivingModel.FK_travelsOffers" FromRole="offers" ToRole="travels" />
         </EntityType>
@@ -278,6 +280,7 @@
           <EntitySetMapping Name="offers">
             <EntityTypeMapping TypeName="SafeDrivingModel.offers">
               <MappingFragment StoreEntitySet="offers">
+                <ScalarProperty Name="email_requests" ColumnName="email_requests" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="remarks" ColumnName="remarks" />
                 <ScalarProperty Name="price" ColumnName="price" />

@@ -1,26 +1,16 @@
-<!-- <div class="form-wrapper-large">
-    <h1 style="width: 400px;"> כל ההצעות הפעילות</h1>
-    <div *ngIf="offerSource && offerSource.length > 0; else noContent;">
-        <div class="filter">
-            <label>תאריך</label>
-            <input class="mat-input-form" [ngModel]="dateFilter|date:'yyyy-MM-dd'"
-            
-            (change)="dateFilter = $event.target.value" type="date" placeholder="תאריך">
-            <label>מקור</label>
-            <select class="mat-input-form"  [ngModel]="selectedSourceCity|date:'yyyy-MM-dd'" style="height: 34px;">
-                <option [value]="c" *ngFor="let c of lCity"> {{c}}</option>
-            </select>
-            <label>יעד</label>
-            <select class="mat-input-form"  [(ngModel)]="selectedDestCity" style="height: 34px;">
-                <option [value]="c" *ngFor="let c of lCity"> {{c}}</option>
-            </select>
-            <button class="btn-color" (click)="filter();">סנן</button>
-            <button class="btn-color-no" (click)="clear();">בטל</button>
-        </div>
+<div class="form-wrapper-large">
+    <h1 style="width: 400px;"> כל ההצעות המתאימות לבקשות</h1>
+    <div *ngIf="requests && requests.length > 0; else noContent;">
+        <select class="mat-input-form" style="height: 28px;" (change)="selectRequest($event.target.value)">
+
+            <option [value]="c.id" *ngFor="let c of requests">
+                {{'מ'+c.resourse_city + ' ' +c.resourse + ' - ל'+ c.destination_city+ ' ' +c.destination+ ', בתאריך '+ (c.date_time|date:"dd/MM/yyyy HH:mm " )}}
+            </option>
+        </select>
         <div class="cont-wrap">
             <div class="active-wrap">
                 <div class="cont-data" *ngFor="let r of offers">
-                    <h2>{{r.driver.username + ' | ' +r.driver.phone }}</h2>
+                    <h3>{{r.driver.username + ' | ' +r.driver.phone }}</h3>
                     <h4 class="strong"> {{'מ'+r.resourse_city + ' - ' +r.resourse}}</h4>
                     <h4 class="strong"> {{'ל'+ r.destination_city+ ' - ' +r.destination}}</h4>
                     <h4>{{'בתאריך '+ (r.date_time|date:"dd/MM/yyyy " )}}</h4>
@@ -30,13 +20,15 @@
                     <h4> {{r.numSeats}} נוסעים שהצטרפו </h4>
                     <h4>מחיר <strong>{{r.price}}</strong> ש"ח </h4>
                     <h4>{{r.remarks}}</h4>
-
+                    <button *ngIf="!r.is_emailed" class="btn-color btn-color-small "
+                    (click)="sendEmailWithOffer(r.id);">שלח הצעה</button>
+                <h4 class="send-email" *ngIf="r.is_emailed">נשלחה כבר הצעה</h4>
                 </div>
-            </div>
+            </div>s
         </div>
     </div>
     <ng-template #noContent>
         <br>
-        <h2>לא נמצאו הצעות</h2>
+        <h2>לא נמצאו בקשות</h2>
     </ng-template>
-</div> -->
+</div>
